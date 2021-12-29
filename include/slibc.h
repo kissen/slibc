@@ -16,6 +16,11 @@ typedef unsigned long int slibc_u64;
 typedef signed long int slibc_i64;
 
 /**
+ * Entry points for a lot of compilers.
+ */
+void _start(void);
+
+/**
  * Issue system call num with one argument.
  */
 slibc_u64 slibc_syscall1(slibc_u64 num, slibc_u64 arg0);
