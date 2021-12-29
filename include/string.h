@@ -64,3 +64,13 @@ int strncmp(const char *s, const char *t, size_t n);
  * Copy contents of s into freshly malloc'd memory.
  */
 char *strdup(const char *s);
+
+/**
+ * Tokenize strings. Uses scary global state.
+ */
+char *strtok(char *str, const char *delim);
+
+/**
+ * Tokenize strings.
+ */
+char *strtok_r(char *str, const char *delim, char **last);
