@@ -1,11 +1,9 @@
 #pragma once
 
-#include "slibc.h"
-
 // (7.19) Common Definitions
 
-typedef slibc_imax ptrdiff_t;
-typedef slibc_umax size_t;
-typedef slibc_imax max_align_t;
+typedef long long int ptrdiff_t;
+typedef long long unsigned int size_t;
+typedef long long int max_align_t;
 
 #define NULL ((void*) 0)

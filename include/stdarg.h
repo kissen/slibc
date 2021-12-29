@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdio.h"
+#include "stddef.h"
 
 // Redefine C Compiler types for use with our C library.
 
@@ -16,3 +17,4 @@ int vprintf(const char *format, va_list ap);
 int vfprintf(FILE *stream, const char *format, va_list ap);
 
 int vsprintf(char *buffer, const char *format, va_list ap);
+int vsnprintf(char *buffer, size_t bufsize, const char *format, va_list ap);
