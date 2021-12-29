@@ -33,9 +33,14 @@ typedef signed long int slibc_i64;
 slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *product);
 
 /**
- * Entry points for our c library.
+ * ASM entry point.
  */
-void _start(int (*main)(int, char **, char **), int argc, char **argv);
+void _start(void);
+
+/**
+ * C entry point. Called from _start.
+ */
+void slibc_start(int argc, char **argv);
 
 /**
  * Issue system call num with one argument.

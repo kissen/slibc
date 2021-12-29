@@ -26,7 +26,7 @@ static void set_up_std_files(void)
     stderr = &err;
 }
 
-void _start(int (*mainptr)(int, char **, char **), int argc, char **argv)
+void slibc_start(int argc, char **argv)
 {
     set_up_std_files();
 
