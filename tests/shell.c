@@ -24,7 +24,17 @@ static char *read_line(void)
         exit(0);
     }
 
-    perror("fgets");
+    return buf;
+}
+
+static void run(char *line)
+{
+    char *argv[] = {
+        line, NULL
+    };
+
+    execvp(line, argv);
+    perror("execvp");
     exit(1);
 }
 
@@ -33,5 +43,8 @@ int main(void)
     while (true) {
         print_promt();
         char *const line = read_line();
+        run(line);
     }
+
+    return 0;
 }

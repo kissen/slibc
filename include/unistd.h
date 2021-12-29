@@ -71,3 +71,13 @@ int execve(const char *file, char *const argv[], char *const envp[]);
  * Execute a new program.
  */
 int execv(const char *file, char *const argv[]);
+
+/**
+ * Execute a new program. Take PATH into account.
+ */
+int execvp(const char *file, char *const argv[]);
+
+/**
+ * Execute a new program. Take PATH into account.
+ */
+int execvpe(const char *file, char *const argv[], char *const envp[]);
