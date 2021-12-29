@@ -8,6 +8,13 @@
 typedef struct FILE FILE;
 
 /**
+ * FILE object for standard file streams.
+ */
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
+
+/**
  * Write least significant byte from c to fp.
  */
 int fputc(int c, FILE *fp);

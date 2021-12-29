@@ -2,5 +2,16 @@
 
 int fputs(const char *s, FILE *fp)
 {
-    return -1;
+    int nwritten = 0;
+
+    for (const char *cur = s; *cur; ++cur) {
+        const int c = *cur;
+        if (fputc(c, fp) == EOF) {
+            return EOF;
+        }
+
+        nwritten += 1;
+    }
+
+    return nwritten;
 }
