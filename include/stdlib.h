@@ -7,6 +7,23 @@
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
+// (7.22.1.2) The atoi, atol and atoll functions
+
+/**
+ * Convert nptr to int.
+ */
+int atoi(const char *nptr);
+
+/**
+ * Convert nptr to long.
+ */
+long int atol(const char *nptr);
+
+/**
+ * Convert nptr to long long.
+ */
+long long int atoll(const char *nptr);
+
 // (7.22.3.3) The free function
 
 /**
