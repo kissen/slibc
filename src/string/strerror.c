@@ -1,7 +1,16 @@
 #include "errno.h"
+#include "stdio.h"
 #include "string.h"
 
-const char *error_to_string(int errnum)
+static const char *format_unknown_error(int errnum)
+{
+    static char buf[256];
+    sprintf(buf, "unknown error with errno=%d", errnum);
+
+    return buf;
+}
+
+static const char *error_to_string(int errnum)
 {
     switch (errnum) {
         case ENOMEM:
@@ -17,7 +26,7 @@ const char *error_to_string(int errnum)
         case 0:
             return "success (no error)";
         default:
-            return "unknown error";
+            return format_unknown_error(errnum);
     }
 }
 
