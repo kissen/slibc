@@ -39,6 +39,11 @@ void _start(void);
 void slibc_start(int argc, char **argv);
 
 /**
+ * Issue system call num with no arguments.
+ */
+slibc_u64 slibc_syscall0(slibc_u64 num);
+
+/**
  * Issue system call num with one argument.
  */
 slibc_u64 slibc_syscall1(slibc_u64 num, slibc_u64);

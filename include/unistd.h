@@ -1,15 +1,13 @@
 #pragma once
 
 #include "stddef.h"
+#include "sys/types.h"
 
 /**
  * UNIX adds ssize_t because size_t is signed and as such cannot
  * easily return error (-1).
  */
 typedef long long int ssize_t;
-
-// TODO: move to sys/types?
-typedef long long int off_t;
 
 /**
  * Standard Unix file descriptors.
@@ -42,3 +40,13 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
  * Wrapper around munmap system call.
  */
 int munmap(void *addr, size_t length);
+
+/**
+ * Fork system call.
+ */
+pid_t fork(void);
+
+/**
+ * Getpid system call. Returns the current PID.
+ */
+pid_t getpid(void);
