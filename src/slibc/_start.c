@@ -5,7 +5,7 @@
 
 #include "stdio/file.h"
 
-extern int main(void);
+extern int main(int, char **, char **);
 
 static void set_up_std_files(void)
 {
@@ -26,10 +26,11 @@ static void set_up_std_files(void)
     stderr = &err;
 }
 
-void _start(void)
+void _start(int (*mainptr)(int, char **, char **), int argc, char **argv)
 {
     set_up_std_files();
 
-    const int return_value = main();
+    char **const envp = argv + argc + 1;
+    const int return_value = main(argc, argv, envp);
     exit(return_value);
 }
