@@ -1,0 +1,5 @@
+BasedOnStyle: microsoft
+ColumnLimit: 100
+FixNamespaceComments: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+UseTab: Always

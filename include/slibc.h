@@ -66,7 +66,8 @@ slibc_u64 slibc_syscall4(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u
 /**
  * Issue system call num with six arguments.
  */
-slibc_u64 slibc_syscall6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
+slibc_u64 slibc_syscall6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64,
+						 slibc_u64);
 
 /**
  * Try to multiply lhs with rhs. Write result to product.
@@ -95,7 +96,7 @@ const char *slibc_i64_to_string(slibc_i64 k);
  *
  * Returns 0 on success and some errno on error.
  */
-typedef int (slibc_format_writefn)(char c, int nwritten, void *fnarg);
+typedef int(slibc_format_writefn)(char c, int nwritten, void *fnarg);
 
 /**
  * Interpret format as a format string with argument args. Format that output
@@ -108,4 +109,5 @@ typedef int (slibc_format_writefn)(char c, int nwritten, void *fnarg);
  *
  * Returns the number of printed characters on success and (-1) * errno on error.
  */
-int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool terminate_zero, const char *format, va_list args);
+int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool terminate_zero,
+				 const char *format, va_list args);

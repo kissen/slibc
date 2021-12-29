@@ -2,5 +2,5 @@
 
 long int atol(const char *nptr)
 {
-    return strtol(nptr, NULL, 10);
+	return strtol(nptr, NULL, 10);
 }

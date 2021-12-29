@@ -5,18 +5,20 @@
 
 void *calloc(size_t nmemb, size_t size)
 {
-    slibc_u64 total_bytes;
-    void *ptr;
+	slibc_u64 total_bytes;
+	void *ptr;
 
-    if (!slibc_safe_multiply_u64(nmemb, size, &total_bytes)) {
-        errno = ENOMEM;
-        return NULL;
-    }
+	if (!slibc_safe_multiply_u64(nmemb, size, &total_bytes))
+	{
+		errno = ENOMEM;
+		return NULL;
+	}
 
-    if ((ptr = malloc(total_bytes)) == NULL) {
-        return NULL;
-    }
+	if ((ptr = malloc(total_bytes)) == NULL)
+	{
+		return NULL;
+	}
 
-    memset(ptr, 0x00, total_bytes);
-    return ptr;
+	memset(ptr, 0x00, total_bytes);
+	return ptr;
 }

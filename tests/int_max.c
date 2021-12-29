@@ -3,6 +3,6 @@
 
 int main(void)
 {
-    printf("%d\n", INT_MAX);
-    return 0;
+	printf("%d\n", INT_MAX);
+	return 0;
 }

@@ -7,9 +7,9 @@
 
 struct memory_block
 {
-    slibc_u32 magic;
-    size_t len;
-    char bytes[];
+	slibc_u32 magic;
+	size_t len;
+	char bytes[];
 };
 
 /**

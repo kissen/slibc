@@ -2,8 +2,8 @@
 
 int fflush(FILE *stream)
 {
-    // What is this caching you speak of?
+	// What is this caching you speak of?
 
-    (void) stream;
-    return 0;
+	(void)stream;
+	return 0;
 }

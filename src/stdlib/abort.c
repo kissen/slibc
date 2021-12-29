@@ -5,14 +5,15 @@
 
 void abort(void)
 {
-    // TODO: unblock signal first
+	// TODO: unblock signal first
 
-    const pid_t self = getpid();
-    const int sigabrt = 6;
+	const pid_t self = getpid();
+	const int sigabrt = 6;
 
-    if (kill(self, sigabrt) == -1) {
-        perror("abort: kill");
-    }
+	if (kill(self, sigabrt) == -1)
+	{
+		perror("abort: kill");
+	}
 
-    exit(99);
+	exit(99);
 }

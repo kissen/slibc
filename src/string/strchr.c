@@ -2,19 +2,22 @@
 
 char *strchr(const char *s, int c)
 {
-    char *ptr = (char *) s;
+	char *ptr = (char *)s;
 
-    while (*ptr) {
-        if (*ptr == c) {
-            return ptr;
-        }
+	while (*ptr)
+	{
+		if (*ptr == c)
+		{
+			return ptr;
+		}
 
-        ptr += 1;
-    }
+		ptr += 1;
+	}
 
-    if (c == 0) {
-        return ptr;
-    }
+	if (c == 0)
+	{
+		return ptr;
+	}
 
-    return NULL;
+	return NULL;
 }

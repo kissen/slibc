@@ -19,7 +19,7 @@ typedef long long int ssize_t;
 /**
  * Error values.
  */
-#define MAP_FAILED ((void *) -1)
+#define MAP_FAILED ((void *)-1)
 
 /**
  * Envioronment pointer.

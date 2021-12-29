@@ -6,12 +6,13 @@
 
 int kill(pid_t pid, int sig)
 {
-    const slibc_i64 result = slibc_syscall2(62, pid, sig);
+	const slibc_i64 result = slibc_syscall2(62, pid, sig);
 
-    if (result < 0) {
-        errno = labs(result);
-        return -1;
-    }
+	if (result < 0)
+	{
+		errno = labs(result);
+		return -1;
+	}
 
-    return 0;
+	return 0;
 }

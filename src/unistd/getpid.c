@@ -5,11 +5,12 @@
 
 pid_t getpid(void)
 {
-    const slibc_i64 result = slibc_syscall0(39);
+	const slibc_i64 result = slibc_syscall0(39);
 
-    if (result < 0) {
-        abort();
-    }
+	if (result < 0)
+	{
+		abort();
+	}
 
-    return result;
+	return result;
 }

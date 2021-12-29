@@ -2,6 +2,6 @@
 
 int main(void)
 {
-    abort();
-    return 92;
+	abort();
+	return 92;
 }

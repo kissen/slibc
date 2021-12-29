@@ -3,12 +3,13 @@
 
 int main()
 {
-    const char message[] = "hello from slibc!\n";
+	const char message[] = "hello from slibc!\n";
 
-    for (size_t i = 0; i < sizeof(message); ++i) {
-        const char c = message[i];
-        putchar(c);
-    }
+	for (size_t i = 0; i < sizeof(message); ++i)
+	{
+		const char c = message[i];
+		putchar(c);
+	}
 
-    return 0;
+	return 0;
 }

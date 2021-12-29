@@ -4,21 +4,24 @@
 
 int main(void)
 {
-    if (ferror(stdin)) {
-        return 1;
-    }
+	if (ferror(stdin))
+	{
+		return 1;
+	}
 
-    stdin->flags |= FILE_FLAGS_ERROR;
+	stdin->flags |= FILE_FLAGS_ERROR;
 
-    if (!ferror(stdin)) {
-        return 2;
-    }
+	if (!ferror(stdin))
+	{
+		return 2;
+	}
 
-    clearerr(stdin);
+	clearerr(stdin);
 
-    if (ferror(stdin)) {
-        return 3;
-    }
+	if (ferror(stdin))
+	{
+		return 3;
+	}
 
-    return 0;
+	return 0;
 }

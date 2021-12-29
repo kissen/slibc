@@ -5,5 +5,5 @@
 
 slibc_i64 linux_get_error_from(void *ptr)
 {
-    return labs((slibc_i64) ptr);
+	return labs((slibc_i64)ptr);
 }

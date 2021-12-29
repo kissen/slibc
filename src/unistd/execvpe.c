@@ -6,90 +6,99 @@
 
 int execvpe(const char *file, char *const argv[], char *const envp[])
 {
-    // If file is weird, don't even bother.
+	// If file is weird, don't even bother.
 
-    const size_t file_len = strlen(file);
+	const size_t file_len = strlen(file);
 
-    if (!file || file_len == 0) {
-        errno = ENOENT;
-        return -1;
-    }
+	if (!file || file_len == 0)
+	{
+		errno = ENOENT;
+		return -1;
+	}
 
-    // If file is an absolute path, then we can just exec as-is.
+	// If file is an absolute path, then we can just exec as-is.
 
-    if (file[0] == '/') {
-        return execve(file, argv, envp);
-    }
+	if (file[0] == '/')
+	{
+		return execve(file, argv, envp);
+	}
 
-    // File is a relative path. Time to try out all entries in PATH.
+	// File is a relative path. Time to try out all entries in PATH.
 
-    const char *const path = getenv("PATH");
-    if (!path) {
-        errno = ENOENT;
-        return -1;
-    }
+	const char *const path = getenv("PATH");
+	if (!path)
+	{
+		errno = ENOENT;
+		return -1;
+	}
 
-    // We make a copy of the PATH variable. That makes the following code easier
-    // as we can mutate pathcpy as we wish.
+	// We make a copy of the PATH variable. That makes the following code easier
+	// as we can mutate pathcpy as we wish.
 
-    char *pathcpy = NULL;
-    char *abspath = NULL;
+	char *pathcpy = NULL;
+	char *abspath = NULL;
 
-    pathcpy = strdup(path);
-    if (!pathcpy) {
-        goto fail;
-    }
+	pathcpy = strdup(path);
+	if (!pathcpy)
+	{
+		goto fail;
+	}
 
-    char *pathptr = pathcpy;
+	char *pathptr = pathcpy;
 
-    while (*pathptr) {
-        // Remove terminating ':' if there are any. The last entry does not
-        // necessarly have ':'.
+	while (*pathptr)
+	{
+		// Remove terminating ':' if there are any. The last entry does not
+		// necessarly have ':'.
 
-        char *const end = strchr(pathptr, ':');
-        if (end) {
-            *end = 0;
-        }
+		char *const end = strchr(pathptr, ':');
+		if (end)
+		{
+			*end = 0;
+		}
 
-        // Construct the absolute path.
+		// Construct the absolute path.
 
-        const size_t abspath_len = strlen(pathptr) + 1 + file_len + 1;
-        char *abspath = malloc(abspath_len);
-        if (!abspath) {
-            goto fail;
-        }
+		const size_t abspath_len = strlen(pathptr) + 1 + file_len + 1;
+		char *abspath = malloc(abspath_len);
+		if (!abspath)
+		{
+			goto fail;
+		}
 
-        sprintf(abspath, "%s/%s", pathptr, file);
+		sprintf(abspath, "%s/%s", pathptr, file);
 
-        // With the absolut path in hand, we can try executing that abs path.
-        // If execve succeeds, it does not return.
+		// With the absolut path in hand, we can try executing that abs path.
+		// If execve succeeds, it does not return.
 
-        execve(abspath, argv, envp);
+		execve(abspath, argv, envp);
 
-        if (errno != ENOENT) {
-            goto fail;
-        }
+		if (errno != ENOENT)
+		{
+			goto fail;
+		}
 
-        // Well this loop iterations did not lead us to success. But we can
-        // always try again with the next element in PATH.
+		// Well this loop iterations did not lead us to success. But we can
+		// always try again with the next element in PATH.
 
-        free(abspath);
-        abspath = NULL;
+		free(abspath);
+		abspath = NULL;
 
-        if (!end) {
-            errno = ENOENT;
-            goto fail;
-        }
+		if (!end)
+		{
+			errno = ENOENT;
+			goto fail;
+		}
 
-        pathptr = end + 1;
-    }
+		pathptr = end + 1;
+	}
 
 fail:;
-    const int error = errno;
+	const int error = errno;
 
-    free(abspath);
-    free(pathcpy);
+	free(abspath);
+	free(pathcpy);
 
-    errno = error;
-    return -1;
+	errno = error;
+	return -1;
 }

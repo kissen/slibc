@@ -4,8 +4,8 @@
 
 int main(void)
 {
-    const pid_t pid = fork();
-    const pid_t mypid = getpid();
-    printf("fork() = %d, getpid() = %d\n", pid, mypid);
-    return 0;
+	const pid_t pid = fork();
+	const pid_t mypid = getpid();
+	printf("fork() = %d, getpid() = %d\n", pid, mypid);
+	return 0;
 }

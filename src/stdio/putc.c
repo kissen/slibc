@@ -2,5 +2,5 @@
 
 int putc(int c, FILE *fp)
 {
-    return fputc(c, fp);
+	return fputc(c, fp);
 }

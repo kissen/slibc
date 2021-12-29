@@ -5,32 +5,36 @@
 
 int main(int argc, char **argv)
 {
-    if (argc <= 1) {
-        fputs("usage: getcwd BUFSIZE\n", stderr);
-        exit(EXIT_FAILURE);
-    }
+	if (argc <= 1)
+	{
+		fputs("usage: getcwd BUFSIZE\n", stderr);
+		exit(EXIT_FAILURE);
+	}
 
-    const int bufsize = atoi(argv[1]);
+	const int bufsize = atoi(argv[1]);
 
-    if (bufsize <= 0) {
-        fprintf(stderr, "error: bad bufsize %d\n", bufsize);
-        exit(EXIT_FAILURE);
-    }
+	if (bufsize <= 0)
+	{
+		fprintf(stderr, "error: bad bufsize %d\n", bufsize);
+		exit(EXIT_FAILURE);
+	}
 
-    char *const buf = malloc(bufsize);
+	char *const buf = malloc(bufsize);
 
-    if (!buf) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+	if (!buf)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
 
-    if (getcwd(buf, bufsize) == NULL) {
-        perror("getcwd");
-        return EXIT_FAILURE;
-    }
+	if (getcwd(buf, bufsize) == NULL)
+	{
+		perror("getcwd");
+		return EXIT_FAILURE;
+	}
 
-    puts(buf);
-    free(buf);
+	puts(buf);
+	free(buf);
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

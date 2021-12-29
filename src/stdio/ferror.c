@@ -5,5 +5,5 @@
 
 int ferror(FILE *stream)
 {
-    return (stream != NULL) && (stream->flags & FILE_FLAGS_ERROR);
+	return (stream != NULL) && (stream->flags & FILE_FLAGS_ERROR);
 }

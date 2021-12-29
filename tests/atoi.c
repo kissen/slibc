@@ -2,8 +2,8 @@
 
 int main(void)
 {
-    const char *const number = "44";
-    const int parsed = atoi(number);
+	const char *const number = "44";
+	const int parsed = atoi(number);
 
-    return parsed;
+	return parsed;
 }

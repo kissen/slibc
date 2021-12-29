@@ -4,35 +4,36 @@
 
 static const char *format_unknown_error(int errnum)
 {
-    static char buf[256];
-    sprintf(buf, "unknown error with errno=%d", errnum);
+	static char buf[256];
+	sprintf(buf, "unknown error with errno=%d", errnum);
 
-    return buf;
+	return buf;
 }
 
 static const char *error_to_string(int errnum)
 {
-    switch (errnum) {
-        case ENOENT:
-            return "no such file or directory";
-        case ENOMEM:
-            return "out of memory";
-        case EINVAL:
-            return "invalid argument";
-        case EDOM:
-            return "domain eror";
-        case ERANGE:
-            return "range error";
-        case EILSEQ:
-            return "EILSEQ";
-        case 0:
-            return "success (no error)";
-        default:
-            return format_unknown_error(errnum);
-    }
+	switch (errnum)
+	{
+	case ENOENT:
+		return "no such file or directory";
+	case ENOMEM:
+		return "out of memory";
+	case EINVAL:
+		return "invalid argument";
+	case EDOM:
+		return "domain eror";
+	case ERANGE:
+		return "range error";
+	case EILSEQ:
+		return "EILSEQ";
+	case 0:
+		return "success (no error)";
+	default:
+		return format_unknown_error(errnum);
+	}
 }
 
 char *strerror(int errnum)
 {
-    return (char *) error_to_string(errnum);
+	return (char *)error_to_string(errnum);
 }

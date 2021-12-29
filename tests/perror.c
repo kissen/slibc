@@ -3,11 +3,11 @@
 
 int main(void)
 {
-    errno = ENOMEM;
-    perror("ENOMEM");
+	errno = ENOMEM;
+	perror("ENOMEM");
 
-    errno = EDOM;
-    perror("EDOM");
+	errno = EDOM;
+	perror("EDOM");
 
-    return 0;
+	return 0;
 }

@@ -2,9 +2,10 @@
 
 int main(int argc, char **argv)
 {
-    for (int i = 0; i < argc; ++i) {
-        puts(argv[i]);
-    }
+	for (int i = 0; i < argc; ++i)
+	{
+		puts(argv[i]);
+	}
 
-    return 0;
+	return 0;
 }

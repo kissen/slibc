@@ -2,6 +2,6 @@
 
 int main()
 {
-    const char *message = "Brief aus dem Gefängnis";
-    return fputs(message, stderr);
+	const char *message = "Brief aus dem Gefängnis";
+	return fputs(message, stderr);
 }

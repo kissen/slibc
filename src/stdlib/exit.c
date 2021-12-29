@@ -3,5 +3,5 @@
 
 void exit(int status)
 {
-    slibc_syscall1(60, status);
+	slibc_syscall1(60, status);
 }
