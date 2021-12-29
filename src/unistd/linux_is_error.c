@@ -13,8 +13,3 @@ bool linux_is_error(void *ptr)
 
     return kernel_return_value >= max_errno;
 }
-
-slibc_i64 linux_get_error_from(void *ptr)
-{
-    return (slibc_i64) ptr;
-}
