@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 static void print_promt(void)
@@ -24,18 +25,38 @@ static char *read_line(void)
         exit(0);
     }
 
+    char *const end = strchr(buf, '\n');
+    if (end) {
+        *end = 0;
+    }
+
     return buf;
 }
 
-static void run(char *line)
+static void run(char *cmd)
 {
-    char *argv[] = {
-        line, NULL
-    };
+    const pid_t pid = fork();
 
-    execvp(line, argv);
-    perror("execvp");
-    exit(1);
+    if (pid < 0) {
+        fprintf(stderr, "%s: error: could not fork process\n", cmd);
+        return;
+    }
+
+    if (pid == 0) {
+        // child
+
+        char *argv[] = {
+            cmd, NULL
+        };
+
+        execvp(cmd, argv);
+        perror("execvp");
+        exit(1);
+    }
+
+    if (pid > 0) {
+        // parent
+    }
 }
 
 int main(void)
