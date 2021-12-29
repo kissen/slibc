@@ -1,26 +1,31 @@
+#include "errno.h"
+#include "slibc.h"
 #include "stdarg.h"
-#include "stddef.h"
 #include "stdio.h"
 
-#include "stdio/bprintf.h"
-
-static enum bprintf_result print_to_file(char c, size_t nwritten, void *fnarg)
+static int print_to_file(char c, int nwritten, void *fnarg)
 {
     (void) nwritten;
     FILE *const fp = fnarg;
 
     if (c == 0) {
-        return BPRINTF_RESULT_OK;
+        return 0;
     }
 
     if (fputc(c, fp) == EOF) {
-        return BPRINTF_RESULT_FAIL;
+        return errno;
     }
 
-    return BPRINTF_RESULT_OK;
+    return 0;
 }
 
-int vfprintf(FILE *stream, const char *format, va_list ap)
+int vfprintf(FILE *stream, const char *format, va_list args)
 {
-    return bprintf(print_to_file, stream, NULL, format, ap);
+    const int result = slibc_format(print_to_file, stream, -1, format, args);
+    if (result < 0) {
+        errno = -result;
+        return -1;
+    }
+
+    return result;
 }

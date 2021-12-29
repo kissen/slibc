@@ -84,7 +84,7 @@ const char *slibc_i64_to_string(slibc_i64 k);
  *
  * Returns 0 on success and some errno on error.
  */
-typedef int (*slibc_format_writefn)(char c, int nwritten, void *fnarg);
+typedef int (slibc_format_writefn)(char c, int nwritten, void *fnarg);
 
 /**
  * Interpret format as a format string with argument args. Format that output

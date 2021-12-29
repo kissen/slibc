@@ -41,7 +41,7 @@ static int write_string_with(slibc_format_writefn fn, void *fnarg, const char *s
 
 int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, const char *format, va_list args)
 {
-    const bool buffer_has_no_limit = (bufsize > 0);
+    const bool buffer_has_no_limit = (bufsize < 0);
 
     int result;
     int nwritten = 0;
