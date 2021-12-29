@@ -3,6 +3,5 @@
 
 long long llabs(long long k)
 {
-
     return SLIBC_ABS(k);
 }

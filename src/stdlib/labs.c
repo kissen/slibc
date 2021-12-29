@@ -3,6 +3,5 @@
 
 long labs(long k)
 {
-
     return SLIBC_ABS(k);
 }
