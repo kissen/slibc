@@ -18,4 +18,14 @@ typedef signed long int slibc_i64;
 /**
  * Issue system call num with one argument.
  */
-slibc_i64 syscall1(slibc_i64 num, slibc_i64 arg0);
+slibc_u64 slibc_syscall1(slibc_u64 num, slibc_u64 arg0);
+
+/**
+ * Issue system call num with two arguments.
+ */
+slibc_u64 slibc_syscall2(slibc_u64 num, slibc_u64 arg0, slibc_u64 arg1);
+
+/**
+ * Issue system call num with three arguments.
+ */
+slibc_u64 slibc_syscall3(slibc_u64 num, slibc_u64 arg0, slibc_u64 arg2, slibc_u64 arg3);
