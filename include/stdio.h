@@ -58,3 +58,18 @@ int sprintf(char *buffer, const char *format, ...);
  * Output error message according to current errno with prefix.
  */
 void perror(const char *prefix);
+
+/**
+ * Get at most one byte from stream.
+ */
+int getc(FILE *stream);
+
+/**
+ * Get at most one byte from stream.
+ */
+int fgetc(FILE *stream);
+
+/**
+ * Get at most one byte from stdin.
+ */
+int getchar(void);

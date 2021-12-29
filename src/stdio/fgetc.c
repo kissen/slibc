@@ -5,12 +5,12 @@
 
 #include "stdio/file.h"
 
-int fputc(int c, FILE *fp)
+int fgetc(FILE *stream)
 {
     ssize_t result;
-    const char buf = c;
+    char buf;
 
-    if ((result = write(fp->fd, &buf, sizeof(buf))) == -1) {
+    if ((result = read(stream->fd, &buf, sizeof(buf))) == -1) {
         errno = labs(result);
         return EOF;
     }
