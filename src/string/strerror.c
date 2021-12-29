@@ -13,6 +13,8 @@ static const char *format_unknown_error(int errnum)
 static const char *error_to_string(int errnum)
 {
     switch (errnum) {
+        case ENOENT:
+            return "no such file or directory";
         case ENOMEM:
             return "out of memory";
         case EINVAL:
