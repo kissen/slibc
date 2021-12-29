@@ -43,3 +43,8 @@ int puts(const char *s);
  * Formatted output to stdout.
  */
 int printf(const char *format, ...);
+
+/**
+ * Formateed output to fd.
+ */
+int fprintf(FILE *stream, const char *format, ...);
