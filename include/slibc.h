@@ -59,6 +59,11 @@ slibc_u64 slibc_syscall2(slibc_u64 num, slibc_u64, slibc_u64);
 slibc_u64 slibc_syscall3(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64);
 
 /**
+ * Issue system call num with four arguments.
+ */
+slibc_u64 slibc_syscall4(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
+
+/**
  * Issue system call num with six arguments.
  */
 slibc_u64 slibc_syscall6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
