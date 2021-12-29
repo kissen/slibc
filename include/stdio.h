@@ -53,3 +53,8 @@ int fprintf(FILE *stream, const char *format, ...);
  * Formatted output to str of arbitrary length.
  */
 int sprintf(char *buffer, const char *format, ...);
+
+/**
+ * Output error message according to current errno with prefix.
+ */
+void perror(const char *prefix);
