@@ -93,3 +93,8 @@ int ferror(FILE *stream);
  * Flush contents from stream.
  */
 int fflush(FILE *stream);
+
+/**
+ * Clear error bit from stream.
+ */
+void clearerr(FILE *stream);
