@@ -21,3 +21,12 @@ void *memmove(void *dst, const void *src, size_t n);
  * Copy zero-terminated string src to dst.
  */
 char *strcpy(char *dst, const char *src);
+
+/**
+ * Copy zero-terminated string src to dst. Only copy up to n characters.  If src
+ * is shorter than n characters, padding null characters are added to dst.
+ *
+ * strncpy does not gurantee that the string written to dst will be
+ * zero-terminated.
+ */
+char *strncpy(char *dst, const char *src, size_t n);
