@@ -21,6 +21,13 @@ typedef signed long int slibc_i64;
 #define SLIBC_ABS(X) ((X) < 0 ? -(X) : (X))
 
 /**
+ * Try to multiply lhs with rhs. Write result to product.
+ * Returns ptr on success and NULL on error (overflow). On error,
+ * errno is set to ERANGE.
+ */
+slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *product);
+
+/**
  * Entry points for a lot of compilers.
  */
 void _start(void);
