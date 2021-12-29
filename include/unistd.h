@@ -60,3 +60,9 @@ pid_t getpid(void);
  * Get the current working directory. Return NULL on error.
  */
 char *getcwd(char *buf, size_t size);
+
+/**
+ * Execute a new program. This is the wrapper around the standard execve system
+ * call.
+ */
+int execve(const char *file, char *const argv[], char *const envp[]);
