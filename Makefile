@@ -12,7 +12,7 @@ all: $(static_library)
 $(static_library): $(object_files)
 	$(AR) -cr $@ $?
 
-bin/%.o: src/%.c $(object_dirs)
+bin/%.o: src/%.c | $(object_dirs)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 bin/:
