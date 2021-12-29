@@ -2,5 +2,8 @@
 
 int main(void)
 {
-    return printf("hello printf! my age is %d and that's quite something huh!\n", 29);
+    const int age = 2021;
+    const char *name = "Jesus";
+
+    return printf("Hello printf! My earthly age is %d and my name is %s.\n", age, name);
 }

@@ -1,5 +1,6 @@
 #include "slibc.h"
 #include "stdbool.h"
+#include "stddef.h"
 
 /**
  * Write c with fn. Return the number of written characters on success or
@@ -82,6 +83,10 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool termina
             return result;
         }
 
+        // it wasn't, we actually have to do formatting..
+
+        const char *to_print = NULL;
+
         // check for unsigned prefix
 
         bool is_unsigned = false;
@@ -91,35 +96,35 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool termina
             fptr += 1;
         }
 
-        // check for signed digit/integer
+        // check for digit/integer
 
-        if (*fptr == 'd' && !is_unsigned) {
-            const int arg = va_arg(args, int);
-            const char *const ss = slibc_i64_to_string(arg);
-
-            if ((result = write_string_with(fn, fnarg, ss, nwritten)) > 0) {
-                nwritten += result;
-                fptr += 1;
-                continue;
+        if (*fptr == 'd' || *fptr == 'i') {
+            if (is_unsigned) {
+                const unsigned int arg = va_arg(args, unsigned int);
+                to_print = slibc_u64_to_string(arg);
+            } else {
+                const int arg = va_arg(args, int);
+                to_print = slibc_i64_to_string(arg);
             }
 
-            return result;
+            goto print_formatted;
         }
 
-        // check for unsigned digit/integer
+        // check for string
 
-        if (*fptr == 'd' && is_unsigned) {
-            const unsigned int arg = va_arg(args, unsigned int);
-            const char *const ss = slibc_u64_to_string(arg);
-
-            if ((result = write_string_with(fn, fnarg, ss, nwritten)) > 0) {
-                nwritten += result;
-                fptr += 1;
-                continue;
-            }
-
-            return result;
+        if (*fptr == 's') {
+            to_print = va_arg(args, const char *);
+            goto print_formatted;
         }
+
+    print_formatted:
+        if ((result = write_string_with(fn, fnarg, to_print, nwritten)) > 0) {
+            nwritten += result;
+            fptr += 1;
+            continue;
+        }
+
+        return result;
     }
 
     if (terminate_zero) {
