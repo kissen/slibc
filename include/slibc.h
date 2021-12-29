@@ -1,5 +1,7 @@
 #pragma once
 
+#include "stdarg.h"
+
 typedef long long int slibc_imax;
 typedef long long unsigned int slibc_umax;
 
@@ -73,3 +75,25 @@ const char *slibc_u64_to_string(slibc_u64 k);
  * to zero-terminated and statically allocated. Do not pass it to free.
  */
 const char *slibc_i64_to_string(slibc_i64 k);
+
+/**
+ * Function types used with function sblic_format. A call to a function of type
+ * slibc_format_writefn should write character c to some output stream when so
+ * far nwritten many bytes were written. fnarg is an optional argument
+ * implementation-defined by the given implementation.
+ *
+ * Returns 0 on success and some errno on error.
+ */
+typedef int (*slibc_format_writefn)(char c, int nwritten, void *fnarg);
+
+/**
+ * Interpret format as a format string with argument args. Format that output
+ * using function fn with fnarg as optional funtion parameter. Write up to bufsize
+ * many elements.
+ *
+ * fnarg is interepreted by fn. busize may be set to a negative value in which case
+ * the output stream is assumed to have no limit (e.g. when writing to stdout).
+ *
+ * Returns the number of printed characters on success and (-1) * errno on error.
+ */
+int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, const char *format, va_list args);
