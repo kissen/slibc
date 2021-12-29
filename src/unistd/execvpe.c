@@ -64,7 +64,7 @@ int execvpe(const char *file, char *const argv[], char *const envp[])
         // With the absolut path in hand, we can try executing that abs path.
         // If execve succeeds, it does not return.
 
-        execve(file, argv, envp);
+        execve(abspath, argv, envp);
 
         if (errno != ENOENT) {
             goto fail;
