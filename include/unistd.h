@@ -66,3 +66,8 @@ char *getcwd(char *buf, size_t size);
  * call.
  */
 int execve(const char *file, char *const argv[], char *const envp[]);
+
+/**
+ * Execute a new program.
+ */
+int execv(const char *file, char *const argv[]);
