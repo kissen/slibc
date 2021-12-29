@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdarg.h"
+#include "stdbool.h"
 
 typedef long long int slibc_imax;
 typedef long long unsigned int slibc_umax;
@@ -93,7 +94,8 @@ typedef int (slibc_format_writefn)(char c, int nwritten, void *fnarg);
  *
  * fnarg is interepreted by fn. busize may be set to a negative value in which case
  * the output stream is assumed to have no limit (e.g. when writing to stdout).
+ * If terminate_zero is set to true, a terminating \0 is written using fn at the end.
  *
  * Returns the number of printed characters on success and (-1) * errno on error.
  */
-int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, const char *format, va_list args);
+int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool terminate_zero, const char *format, va_list args);

@@ -39,7 +39,7 @@ static int write_string_with(slibc_format_writefn fn, void *fnarg, const char *s
     return written_by_us;
 }
 
-int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, const char *format, va_list args)
+int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool terminate_zero, const char *format, va_list args)
 {
     const bool buffer_has_no_limit = (bufsize < 0);
 
@@ -118,6 +118,14 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, const char *
                 continue;
             }
 
+            return result;
+        }
+    }
+
+    if (terminate_zero) {
+        if ((result = write_char_with(fn, fnarg, '\0', nwritten)) > 0) {
+            nwritten += result;
+        } else {
             return result;
         }
     }

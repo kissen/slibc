@@ -45,6 +45,11 @@ int puts(const char *s);
 int printf(const char *format, ...);
 
 /**
- * Formateed output to fd.
+ * Formatted output to fd.
  */
 int fprintf(FILE *stream, const char *format, ...);
+
+/**
+ * Formatted output to str of arbitrary length.
+ */
+int sprintf(char *buffer, const char *format, ...);

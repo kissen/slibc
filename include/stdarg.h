@@ -14,3 +14,5 @@ typedef __builtin_va_list va_list;
 
 int vprintf(const char *format, va_list ap);
 int vfprintf(FILE *stream, const char *format, va_list ap);
+
+int vsprintf(char *buffer, const char *format, va_list ap);
