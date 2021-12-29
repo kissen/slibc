@@ -30,3 +30,10 @@ char *strcpy(char *dst, const char *src);
  * zero-terminated.
  */
 char *strncpy(char *dst, const char *src, size_t n);
+
+// (7.24.6.1) The memset function
+
+/**
+ * Set the first n bytes in s to the least significant byte in c.
+ */
+void *memset(void *s, int c, size_t n);
