@@ -17,7 +17,7 @@ int fputc(int c, FILE *fp)
     }
 
     if (result == 0) {
-        fp->fd |= FILE_FLAGS_EOF;
+        fp->flags |= FILE_FLAGS_EOF;
         return EOF;
     }
 

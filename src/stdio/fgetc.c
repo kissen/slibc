@@ -17,7 +17,7 @@ int fgetc(FILE *stream)
     }
 
     if (result == 0) {
-        stream->fd |= FILE_FLAGS_EOF;
+        stream->flags |= FILE_FLAGS_EOF;
         return EOF;
     }
 
