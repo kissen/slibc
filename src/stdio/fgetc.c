@@ -12,6 +12,12 @@ int fgetc(FILE *stream)
 
     if ((result = read(stream->fd, &buf, sizeof(buf))) == -1) {
         errno = labs(result);
+        stream->fd |= FILE_FLAGS_ERROR;
+        return EOF;
+    }
+
+    if (result == 0) {
+        stream->fd |= FILE_FLAGS_EOF;
         return EOF;
     }
 
