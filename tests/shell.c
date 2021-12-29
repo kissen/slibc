@@ -45,7 +45,7 @@ static void exec(const char *cmd, char **argv)
 
     if (pid == 0) {
         execvp(cmd, argv);
-        perror("execvp");
+        perror(cmd);
         exit(1);
     }
 
