@@ -78,3 +78,13 @@ int getchar(void);
  * Read line from stream.
  */
 char *fgets(char *s, int size, FILE *stream);
+
+/**
+ * Return whether fd has the EOF bit set.
+ */
+int feof(FILE *stream);
+
+/**
+ * Return whether fd has the error bit set.
+ */
+int ferror(FILE *stream);
