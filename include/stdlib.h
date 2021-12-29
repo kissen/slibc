@@ -24,6 +24,28 @@ long int atol(const char *nptr);
  */
 long long int atoll(const char *nptr);
 
+// (7.22.1.4) The strtol, strtoll, strotul and strtoull functions
+
+/**
+ * Convert nptr to integer.
+ */
+long int strtol(const char *nptr, char **endptr, int base);
+
+/**
+ * Convert nptr to integer.
+ */
+long long int strtoll(const char *nptr, char **endptr, int base);
+
+/**
+ * Convert nptr to integer.
+ */
+unsigned long int strtoul(const char *nptr, char **endptr, int base);
+
+/**
+ * Convert nptr to integer.
+ */
+unsigned long long int strtoull(const char *nptr, char **endptr, int base);
+
 // (7.22.3.3) The free function
 
 /**

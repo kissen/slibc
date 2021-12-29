@@ -1,6 +1,6 @@
 #include "stdlib.h"
 
-long int atol(const char *nptr)
+long int strtol(const char *nptr, char **endptr, int base)
 {
-    return strtol(nptr, NULL, 10);
+    return (long int) strtoll(nptr, endptr, base);
 }
