@@ -22,6 +22,11 @@ typedef long long int ssize_t;
 #define MAP_FAILED ((void *) -1)
 
 /**
+ * Envioronment pointer.
+ */
+extern char **environ;
+
+/**
  * Wrapper for write system call.
  */
 ssize_t write(int fd, const void *buf, size_t count);

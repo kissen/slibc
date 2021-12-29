@@ -33,7 +33,7 @@ void slibc_start(int argc, char **argv)
 {
     set_up_std_files();
 
-    char **const envp = argv + argc + 1;
-    const int return_value = main(argc, argv, envp);
+    environ = argv + argc + 1;
+    const int return_value = main(argc, argv, environ);
     exit(return_value);
 }
