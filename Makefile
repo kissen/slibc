@@ -35,11 +35,17 @@ bin/:
 bin/%/:
 	mkdir -p $@
 
+compile_commands.json:
+	$(MAKE) clean
+	compiledb $(MAKE)
+
 clean:
 	rm -f $(test_exes)
 	rm -f $(static_library)
 	rm -f $(filter %.o, $(object_files))
 	rm -df $(object_dirs) bin/tests/ bin/
+	rm -f compile_commands.json
+	rm -rf .cache
 
 .PHONY: all release clean
 .PRECIOUS: $(object_dirs) bin/tests/
