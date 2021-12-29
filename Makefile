@@ -1,4 +1,4 @@
-CFLAGS += -ffreestanding
+CFLAGS += -ffreestanding -nostdinc -I include/
 
 static_library = bin/slibc.a
 
@@ -24,7 +24,7 @@ bin/%/:
 clean:
 	rm -f $(static_library)
 	rm -f $(object_files)
-	rmdir --ignore-fail-on-non-empty $(object_dirs) bin/
+	rm -df $(object_dirs) bin/
 
 .PHONY: all clean
 .PRECIOUS: $(object_dirs)
