@@ -51,8 +51,16 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool termina
     while (buffer_has_no_limit || nwritten < bufsize) {
         // final character in string
 
-        if (*fptr == 0) {
-            break;
+        if (*fptr == '\0') {
+            if (terminate_zero) {
+                if ((result = write_char_with(fn, fnarg, '\0', nwritten)) > 0) {
+                    nwritten += result;
+                } else {
+                    return result;
+                }
+            }
+
+            break; // we are done formatting
         }
 
         // regular case: just print the lovely character
@@ -125,14 +133,6 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool termina
         }
 
         return result;
-    }
-
-    if (terminate_zero) {
-        if ((result = write_char_with(fn, fnarg, '\0', nwritten)) > 0) {
-            nwritten += result;
-        } else {
-            return result;
-        }
     }
 
     return nwritten;
