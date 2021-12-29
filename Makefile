@@ -12,6 +12,10 @@ test_exes := $(patsubst tests/%.c, bin/tests/%, $(test_files))
 
 all: $(static_library) $(test_exes)
 
+release:
+	$(MAKE) clean
+	CFLAGS="-O3 -flto" $(MAKE) all
+
 $(static_library): $(object_files)
 	rm -f $@
 	$(AR) -cr $@ $^
@@ -37,5 +41,5 @@ clean:
 	rm -f $(filter %.o, $(object_files))
 	rm -df $(object_dirs) bin/tests/ bin/
 
-.PHONY: all clean
+.PHONY: all release clean
 .PRECIOUS: $(object_dirs) bin/tests/
