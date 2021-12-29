@@ -34,4 +34,6 @@ int main(void)
         const char c = my_memory[i];
         fputc(c, stdout);
     }
+
+    return 0;
 }

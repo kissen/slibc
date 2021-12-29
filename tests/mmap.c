@@ -10,4 +10,5 @@ int main(void)
     off_t off = 0xbadf00d;
 
     mmap(addr, len, prot, flag, fd, off);
+    return 0;
 }

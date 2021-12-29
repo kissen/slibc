@@ -3,4 +3,5 @@
 int main()
 {
     exit(92);
+    return 0;
 }

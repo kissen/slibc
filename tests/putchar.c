@@ -9,4 +9,6 @@ int main()
         const char c = message[i];
         putchar(c);
     }
+
+    return 0;
 }
