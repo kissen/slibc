@@ -1,5 +1,7 @@
 #pragma once
 
+#define EOF -1
+
 /**
  * Opaque data type that represents a file handle.
  */
