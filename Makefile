@@ -1,4 +1,4 @@
-CFLAGS += -ffreestanding -nostdinc -I include/
+CFLAGS += -ffreestanding -nostdinc -I include/ -I src/
 
 static_library = bin/slibc.a
 
