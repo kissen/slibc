@@ -1,5 +1,6 @@
 #pragma once
 
+#include "slibc.h"
 #include "stdbool.h"
 
 /**

@@ -1,16 +1,15 @@
 #pragma once
 
-#include "slibc.h"
 #include "stddef.h"
 
 /**
  * UNIX adds ssize_t because size_t is signed and as such cannot
  * easily return error (-1).
  */
-typedef slibc_imax ssize_t;
+typedef long long int ssize_t;
 
 // TODO: move to sys/types?
-typedef slibc_imax off_t;
+typedef long long int off_t;
 
 /**
  * Standard Unix file descriptors.

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "stdio.h"
 #include "stddef.h"
 
 // Redefine C Compiler types for use with our C library.
@@ -12,6 +11,8 @@ typedef __builtin_va_list va_list;
 #define va_copy(dest, src) __builtin_va_copy(dest, src)
 
 // I/O w/ variable arguments.
+
+typedef struct FILE FILE;
 
 int vprintf(const char *format, va_list ap);
 int vfprintf(FILE *stream, const char *format, va_list ap);

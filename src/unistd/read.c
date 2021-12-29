@@ -1,4 +1,5 @@
 #include "errno.h"
+#include "slibc.h"
 #include "stdlib.h"
 #include "unistd.h"
 
