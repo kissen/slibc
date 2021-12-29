@@ -3,10 +3,9 @@
 
 int putchar(int c)
 {
-    const int fd = 1;
     const char buf = c;
 
-    if (write(fd, &buf, 1) == -1) {
+    if (write(STDIN_FILENO, &buf, 1) == -1) {
         return EOF;
     }
 
