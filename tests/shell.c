@@ -34,7 +34,7 @@ static char *read_line(void)
     return buf;
 }
 
-static void run(char *cmd)
+static void exec(const char *cmd, char **argv)
 {
     const pid_t pid = fork();
 
@@ -44,12 +44,6 @@ static void run(char *cmd)
     }
 
     if (pid == 0) {
-        // child
-
-        char *argv[] = {
-            cmd, NULL
-        };
-
         execvp(cmd, argv);
         perror("execvp");
         exit(1);
@@ -61,6 +55,37 @@ static void run(char *cmd)
             perror("waitpid");
         }
     }
+}
+
+static void run(char *cmdline)
+{
+    static const char delim[] = " \t\n";
+
+    int argc = 0;
+    char **argv = NULL;
+
+    char *token = strtok(cmdline, delim);
+
+    while (token) {
+        char **const extended = realloc(argv, (argc + 1) * sizeof(*argv));
+        if (!extended) {
+            goto cleanup;
+        }
+
+        argv = extended;
+        argv[argc] = token;
+        argc += 1;
+
+        token = strtok(NULL, delim);
+    }
+
+    if (argc > 0) {
+        const char *exe = argv[0];
+        exec(exe, argv);
+    }
+
+cleanup:
+    free(argv);
 }
 
 int main(void)
