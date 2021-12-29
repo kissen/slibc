@@ -88,3 +88,8 @@ int feof(FILE *stream);
  * Return whether fd has the error bit set.
  */
 int ferror(FILE *stream);
+
+/**
+ * Flush contents from stream.
+ */
+int fflush(FILE *stream);
