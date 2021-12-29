@@ -9,6 +9,9 @@
  */
 typedef slibc_imax ssize_t;
 
+// TODO: move to sys/types?
+typedef slibc_imax off_t;
+
 /**
  * Standard Unix file descriptors.
  */
@@ -17,6 +20,21 @@ typedef slibc_imax ssize_t;
 #define STDERR_FILENO 2
 
 /**
+ * Error values.
+ */
+#define MAP_FAILED ((void *) -1)
+
+/**
  * Wrapper for write system call.
  */
 ssize_t write(int fd, const void *buf, size_t count);
+
+/**
+ * Wrapper for read system call.
+ */
+ssize_t read(int fd, void *buf, size_t count);
+
+/**
+ * Wrapper for mmap system call.
+ */
+void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
