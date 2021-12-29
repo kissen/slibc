@@ -1,6 +1,6 @@
 slibc_syscall2:
-	movq    %rdi, %rax  // system call number
-	movq 	%rsi, %rdi  // first argument
-	movq 	%rdx, %rsi  // second argument
+	movq    %rdi, %rax
+	movq 	%rsi, %rdi
+	movq 	%rdx, %rsi
 	syscall
 	ret
