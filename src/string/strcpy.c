@@ -2,6 +2,8 @@
 
 char *strcpy(char *dst, const char *src)
 {
+    char *const return_value = dst;
+
     while (*src) {
         *dst = *src;
 
@@ -9,5 +11,5 @@ char *strcpy(char *dst, const char *src)
         src += 1;
     }
 
-    return dst;
+    return return_value;
 }
