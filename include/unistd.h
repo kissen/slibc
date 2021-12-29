@@ -50,3 +50,8 @@ pid_t fork(void);
  * Getpid system call. Returns the current PID.
  */
 pid_t getpid(void);
+
+/**
+ * Get the current working directory. Return NULL on error.
+ */
+char *getcwd(char *buf, size_t size);
