@@ -81,3 +81,8 @@ int execvp(const char *file, char *const argv[]);
  * Execute a new program. Take PATH into account.
  */
 int execvpe(const char *file, char *const argv[], char *const envp[]);
+
+/**
+ * Switch to dir.
+ */
+int chdir(const char *dir);
