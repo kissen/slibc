@@ -14,7 +14,7 @@ void free(void *ptr)
     // Check whether the magic is set. This is to get some
     // sanity checking whether ptr was actually allocated.
 
-    struct memory_block *block = ((struct memory_block *) ptr) - 1;
+    struct memory_block *block = memory_block_get_from(ptr);
 
     if (block->magic != MEMORY_BLOCK_MAGIC) {
         abort();
@@ -24,7 +24,9 @@ void free(void *ptr)
 
     // Now we can unmap that memory.
 
-    if (munmap(block, block->len) == -1) {
+    const size_t original_mmap_size = block->len + sizeof(*block);
+
+    if (munmap(block, original_mmap_size) == -1) {
         abort();
     }
 }

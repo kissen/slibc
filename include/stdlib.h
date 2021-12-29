@@ -29,6 +29,14 @@ void *calloc(size_t nmemb, size_t size);
  */
 void *malloc(size_t size);
 
+// (7.22.3.5) The realloc function
+
+/**
+ * Reallocate ptr to hold size-many bytes. Returns the new memory location or
+ * NULL on error.
+ */
+void *realloc(void *ptr, size_t size);
+
 // (7.22.6.1) The abs, labs, and llabs Functions
 
 /**

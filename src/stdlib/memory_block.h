@@ -11,3 +11,10 @@ struct memory_block
     size_t len;
     char bytes[];
 };
+
+/**
+ * Given mallocptr as returned from a function like malloc, calloc and so on,
+ * return a pointer to the underlying memory_block. If mallocptr is NULL,
+ * this function also returns NULL.
+ */
+struct memory_block *memory_block_get_from(void *mallocptr);
