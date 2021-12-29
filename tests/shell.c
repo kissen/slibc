@@ -34,7 +34,7 @@ static char *read_line(void)
     return buf;
 }
 
-static void exec(const char *cmd, char **argv)
+static void run_program(const char *cmd, char **argv)
 {
     const pid_t pid = fork();
 
@@ -54,6 +54,13 @@ static void exec(const char *cmd, char **argv)
         if (waitpid(pid, &status, 0) == -1) {
             perror("waitpid");
         }
+    }
+}
+
+static void run_cd(const char *path)
+{
+    if (chdir(path) == -1) {
+        perror(path);
     }
 }
 
@@ -79,10 +86,18 @@ static void run(char *cmdline)
         token = strtok(NULL, delim);
     }
 
-    if (argc > 0) {
-        const char *exe = argv[0];
-        exec(exe, argv);
+    if (argc == 0) {
+        goto cleanup;
     }
+
+    if (strcmp(argv[0], "cd") == 0) {
+        const char *path = argv[1];
+        run_cd(path);
+        goto cleanup;
+    }
+
+    const char *exe = argv[0];
+    run_program(exe, argv);
 
 cleanup:
     free(argv);

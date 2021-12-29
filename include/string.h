@@ -56,7 +56,12 @@ size_t strlen(const char *s);
 char *strchr(const char *s, int c);
 
 /**
- * Like strmpc, but compares only at most n characters.
+ * Compare two strings for equality.
+ */
+int strcmp(const char *s, const char *t);
+
+/**
+ * Like strcmp, but compares only at most n characters.
  */
 int strncmp(const char *s, const char *t, size_t n);
 
