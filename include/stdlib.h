@@ -104,3 +104,8 @@ void exit(int status);
  * Abort the process.
  */
 void abort(void);
+
+/**
+ * Get environment variable value for key. Return NULL if key was not found.
+ */
+char *getenv(const char *key);
