@@ -38,3 +38,8 @@ int putchar(int c);
  * Write string s to stdout. A newline is appended to stdout.
  */
 int puts(const char *s);
+
+/**
+ * Formatted output to stdout.
+ */
+int printf(const char *format, ...);

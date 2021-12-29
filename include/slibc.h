@@ -67,3 +67,9 @@ slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *prod
  * to zero-terminated and statically allocated. Do not pass it to free.
  */
 const char *slibc_u64_to_string(slibc_u64 k);
+
+/**
+ * Convert n to a string representation. The returned string is guaranteed
+ * to zero-terminated and statically allocated. Do not pass it to free.
+ */
+const char *slibc_i64_to_string(slibc_i64 k);

@@ -11,5 +11,7 @@ char *strcpy(char *dst, const char *src)
         src += 1;
     }
 
+    *dst = 0;
+
     return return_value;
 }
