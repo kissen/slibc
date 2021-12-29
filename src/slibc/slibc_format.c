@@ -32,8 +32,8 @@ static int write_string_with(slibc_format_writefn fn, void *fnarg, const char *s
         }
 
         s += 1;
-        nwritten += result;
-        written_by_us += result;
+        nwritten += 1;
+        written_by_us += 1;
     }
 
     return written_by_us;
