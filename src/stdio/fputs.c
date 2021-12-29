@@ -1,3 +1,4 @@
+#include "limits.h"
 #include "stdio.h"
 
 int fputs(const char *s, FILE *fp)
@@ -10,7 +11,9 @@ int fputs(const char *s, FILE *fp)
             return EOF;
         }
 
-        nwritten += 1;
+        if (nwritten != INT_MAX) {
+            nwritten += 1;
+        }
     }
 
     return nwritten;
