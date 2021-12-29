@@ -54,3 +54,8 @@ size_t strlen(const char *s);
  * Return first occurence of c in s.
  */
 char *strchr(const char *s, int c);
+
+/**
+ * Like strmpc, but compares only at most n characters.
+ */
+int strncmp(const char *s, const char *t, size_t n);
