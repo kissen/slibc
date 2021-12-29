@@ -13,6 +13,7 @@ test_exes := $(patsubst tests/%.c, bin/tests/%, $(test_files))
 all: $(static_library) $(test_exes)
 
 $(static_library): $(object_files)
+	rm -f $@
 	$(AR) -cr $@ $?
 
 bin/%.o: src/%.c | $(object_dirs)
