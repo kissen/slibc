@@ -16,6 +16,11 @@ typedef unsigned long int slibc_u64;
 typedef signed long int slibc_i64;
 
 /**
+ * Resolve to absolute value of X.
+ */
+#define SLIBC_ABS(X) ((X) < 0 ? -(X) : (X))
+
+/**
  * Entry points for a lot of compilers.
  */
 void _start(void);
