@@ -1,7 +1,7 @@
-#include "errno.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "unistd.h"
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define PROT_READ 0x01
 #define PROT_WRITE 0x02

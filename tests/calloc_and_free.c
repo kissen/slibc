@@ -1,6 +1,6 @@
-#include "errno.h"
-#include "stdio.h"
-#include "stdlib.h"
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static char get_int_at(size_t idx)
 {

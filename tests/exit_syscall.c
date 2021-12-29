@@ -1,4 +1,4 @@
-#include "slibc.h"
+#include <slibc.h>
 
 int main(void)
 {
