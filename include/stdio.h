@@ -73,3 +73,8 @@ int fgetc(FILE *stream);
  * Get at most one byte from stdin.
  */
 int getchar(void);
+
+/**
+ * Read line from stream.
+ */
+char *fgets(char *s, int size, FILE *stream);

@@ -44,3 +44,13 @@ void *memset(void *s, int c, size_t n);
  * Return statically allocated string that describes errnum.
  */
 char *strerror(int errnum);
+
+/**
+ * Return lenght of s.
+ */
+size_t strlen(const char *s);
+
+/**
+ * Return first occurence of c in s.
+ */
+char *strchr(const char *s, int c);
