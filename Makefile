@@ -14,7 +14,7 @@ all: $(static_library) $(test_exes)
 
 release:
 	$(MAKE) clean
-	CFLAGS="-O3 -flto" $(MAKE) all
+	CFLAGS="-O3 -flto -Wno-lto-type-mismatch" $(MAKE) all
 
 $(static_library): $(object_files)
 	rm -f $@
