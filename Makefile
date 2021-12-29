@@ -14,7 +14,7 @@ all: $(static_library) $(test_exes)
 
 $(static_library): $(object_files)
 	rm -f $@
-	$(AR) -cr $@ $?
+	$(AR) -cr $@ $^
 
 bin/%.o: src/%.c | $(object_dirs)
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -23,7 +23,7 @@ bin/%.o: src/%.s | $(object_dirs)
 	$(CC) -c -o $@ $<
 
 bin/tests/%: tests/%.c $(static_library) | bin/tests/
-	$(CC) $(CFLAGS) -o $@ $?
+	$(CC) $(CFLAGS) -o $@ $^
 
 bin/:
 	mkdir -p $@
