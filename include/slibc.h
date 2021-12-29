@@ -26,13 +26,6 @@ typedef signed long int slibc_i64;
 #define SLIBC_MIN(X, Y) ((X) < (Y) ? (X) : (Y))
 
 /**
- * Try to multiply lhs with rhs. Write result to product.
- * Returns ptr on success and NULL on error (overflow). On error,
- * errno is set to ERANGE.
- */
-slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *product);
-
-/**
  * ASM entry point.
  */
 void _start(void);
@@ -61,3 +54,16 @@ slibc_u64 slibc_syscall3(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64);
  * Issue system call num with six arguments.
  */
 slibc_u64 slibc_syscall6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
+
+/**
+ * Try to multiply lhs with rhs. Write result to product.
+ * Returns ptr on success and NULL on error (overflow). On error,
+ * errno is set to ERANGE.
+ */
+slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *product);
+
+/**
+ * Convert n to a string representation. The returned string is guaranteed
+ * to zero-terminated and statically allocated. Do not pass it to free.
+ */
+const char *slibc_u64_to_string(slibc_u64 k);
