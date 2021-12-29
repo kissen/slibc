@@ -59,3 +59,8 @@ char *strchr(const char *s, int c);
  * Like strmpc, but compares only at most n characters.
  */
 int strncmp(const char *s, const char *t, size_t n);
+
+/**
+ * Copy contents of s into freshly malloc'd memory.
+ */
+char *strdup(const char *s);
