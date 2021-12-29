@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 static void print_promt(void)
@@ -18,16 +19,16 @@ static char *read_line(void)
     static char buf[4096];
 
     if (fgets(buf, sizeof(buf), stdin)) {
+        char *const end = strchr(buf, '\n');
+        if (end) {
+            *end = 0;
+        }
+
         return buf;
     }
 
     if (feof(stdin)) {
         exit(0);
-    }
-
-    char *const end = strchr(buf, '\n');
-    if (end) {
-        *end = 0;
     }
 
     return buf;
@@ -55,7 +56,10 @@ static void run(char *cmd)
     }
 
     if (pid > 0) {
-        // parent
+        int status;
+        if (waitpid(pid, &status, 0) == -1) {
+            perror("waitpid");
+        }
     }
 }
 
