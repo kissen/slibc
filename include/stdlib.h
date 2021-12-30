@@ -1,5 +1,6 @@
 #pragma once
 
+#include "alloca.h"
 #include "stddef.h"
 
 // (7.22) General utilities
@@ -109,3 +110,24 @@ void abort(void);
  * Get environment variable value for key. Return NULL if key was not found.
  */
 char *getenv(const char *key);
+
+/**
+ * Seed the random number generator.
+ */
+void srand(unsigned int seed);
+
+/**
+ * Seed the random number generator. Identical to a call to srand.
+ */
+void srandom(unsigned int seed);
+
+/**
+ * Return a random number.
+ */
+int rand(void);
+
+/**
+ * Return a random number. Similar to a call to rand, but returns a long rather
+ * than an int.
+ */
+long random(void);

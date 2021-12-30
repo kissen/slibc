@@ -1,7 +1,8 @@
 #pragma once
 
-#include "stddef.h"
-#include "sys/types.h"
+#include <getopt.h>
+#include <stddef.h>
+#include <sys/types.h>
 
 /**
  * UNIX adds ssize_t because size_t is signed and as such cannot
@@ -35,6 +36,16 @@ ssize_t write(int fd, const void *buf, size_t count);
  * Wrapper for read system call.
  */
 ssize_t read(int fd, void *buf, size_t count);
+
+/**
+ * Wrapper for the open system call.
+ */
+int open(const char *path, int flags);
+
+/**
+ * Wrapper for the close system call.
+ */
+int close(int fd);
 
 /**
  * Wrapper for mmap system call.
@@ -86,3 +97,8 @@ int execvpe(const char *file, char *const argv[], char *const envp[]);
  * Switch to dir.
  */
 int chdir(const char *dir);
+
+/**
+ * Generic interface for running system calls.
+ */
+long syscall(long number, ...);

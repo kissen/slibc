@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 #define EOF -1
 
 /**
@@ -98,3 +100,28 @@ int fflush(FILE *stream);
  * Clear error bit from stream.
  */
 void clearerr(FILE *stream);
+
+/**
+ * Open file.
+ */
+FILE *fopen(const char *path, const char *mode);
+
+/**
+ * Close file.
+ */
+int fclose(FILE *fp);
+
+/**
+ * Put back one byte to fp.
+ */
+int ungetc(int c, FILE *fp);
+
+/**
+ * Read from file.
+ */
+size_t fread(void *buf, size_t size, size_t nmemb, FILE *fp);
+
+/**
+ * Write to file.
+ */
+size_t fwrite(const void *buf, size_t size, size_t nmemb, FILE *fp);

@@ -9,11 +9,11 @@ extern int main(int, char **, char **);
 
 static void set_up_std_files(void)
 {
-	static FILE in = {.fd = STDIN_FILENO, .flags = 0};
+	static FILE in = {.fd = STDIN_FILENO, .flags = 0, .nunget = 0};
 
-	static FILE out = {.fd = STDOUT_FILENO, .flags = 0};
+	static FILE out = {.fd = STDOUT_FILENO, .flags = 0, .nunget = 0};
 
-	static FILE err = {.fd = STDERR_FILENO, .flags = 0};
+	static FILE err = {.fd = STDERR_FILENO, .flags = 0, .nunget = 0};
 
 	stdin = &in;
 	stdout = &out;

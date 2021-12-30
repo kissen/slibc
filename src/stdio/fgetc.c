@@ -5,7 +5,13 @@
 
 #include "stdio/file.h"
 
-int fgetc(FILE *stream)
+static int fgetc_from_unget(FILE *stream)
+{
+	stream->nunget -= 1;
+	return stream->unget;
+}
+
+static int fgetc_from_fd(FILE *stream)
 {
 	ssize_t result;
 	char buf;
@@ -24,4 +30,16 @@ int fgetc(FILE *stream)
 	}
 
 	return buf;
+}
+
+int fgetc(FILE *stream)
+{
+	if (stream->nunget > 0)
+	{
+		return fgetc_from_unget(stream);
+	}
+	else
+	{
+		return fgetc_from_fd(stream);
+	}
 }

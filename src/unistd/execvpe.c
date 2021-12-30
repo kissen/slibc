@@ -8,15 +8,9 @@ int execvpe(const char *file, char *const argv[], char *const envp[])
 {
 	// If file is weird, don't even bother.
 
-	if (!file)
-	{
-		errno = ENOENT;
-		return -1;
-	}
-
 	const size_t file_len = strlen(file);
 
-	if (file_len == 0)
+	if (!file || file_len == 0)
 	{
 		errno = ENOENT;
 		return -1;

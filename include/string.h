@@ -56,6 +56,11 @@ size_t strlen(const char *s);
 char *strchr(const char *s, int c);
 
 /**
+ * Return last occurence of c in s.
+ */
+char *strrchr(const char *s, int c);
+
+/**
  * Compare two strings for equality.
  */
 int strcmp(const char *s, const char *t);
@@ -79,3 +84,8 @@ char *strtok(char *str, const char *delim);
  * Tokenize strings.
  */
 char *strtok_r(char *str, const char *delim, char **last);
+
+/**
+ * Append tail to str.
+ */
+char *strcat(char *str, const char *tail);

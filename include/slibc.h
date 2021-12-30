@@ -70,6 +70,50 @@ slibc_u64 slibc_syscall6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u
 						 slibc_u64);
 
 /**
+ * Handle numeric system call result. If it is negative, errno is set
+ * accordingly and -1 is returned. If the result is >= 0, that value is returned
+ * as-is and errno is not touched.
+ */
+slibc_i64 slibc_set_errno_for(slibc_i64 system_call_result);
+
+/**
+ * Issue system call with given arguments. Handle the result as by a call to
+ * slibc_set_errno_for. Return error code for use by the application.
+ */
+slibc_i64 slibc_syscall_and_set0(slibc_u64 num);
+
+/**
+ * Issue system call with given arguments. Handle the result as by a call to
+ * slibc_set_errno_for. Return error code for use by the application.
+ */
+slibc_i64 slibc_syscall_and_set1(slibc_u64 num, slibc_u64);
+
+/**
+ * Issue system call with given arguments. Handle the result as by a call to
+ * slibc_set_errno_for. Return error code for use by the application.
+ */
+slibc_i64 slibc_syscall_and_set2(slibc_u64 num, slibc_u64, slibc_u64);
+
+/**
+ * Issue system call with given arguments. Handle the result as by a call to
+ * slibc_set_errno_for. Return error code for use by the application.
+ */
+slibc_i64 slibc_syscall_and_set3(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64);
+
+/**
+ * Issue system call with given arguments. Handle the result as by a call to
+ * slibc_set_errno_for. Return error code for use by the application.
+ */
+slibc_i64 slibc_syscall_and_set4(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
+
+/**
+ * Issue system call with given arguments. Handle the result as by a call to
+ * slibc_set_errno_for. Return error code for use by the application.
+ */
+slibc_i64 slibc_syscall_and_set6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64,
+								 slibc_u64, slibc_u64);
+
+/**
  * Try to multiply lhs with rhs. Write result to product.
  * Returns ptr on success and NULL on error (overflow). On error,
  * errno is set to ERANGE.

@@ -1,16 +1,11 @@
-#include "errno.h"
+#include "assert.h"
 #include "slibc.h"
-#include "stdlib.h"
+#include "sys/syscall.h"
 #include "unistd.h"
 
 pid_t getpid(void)
 {
-	const slibc_i64 result = slibc_syscall0(39);
-
-	if (result < 0)
-	{
-		abort();
-	}
-
+	const slibc_i64 result = slibc_syscall0(SYS_getpid);
+	assert(result >= 0);
 	return result;
 }

@@ -19,11 +19,32 @@ static int write_char_with(slibc_format_writefn fn, void *fnarg, char c, int nwr
 }
 
 /**
+ * Return a static string that contains just character c and a terminating zero.
+ */
+static const char *format_single_character(char c)
+{
+	static char buf[2];
+	*buf = c;
+
+	return buf;
+}
+
+/**
  * Write c with fn. Return the number of written characters on success or
  * a negative errno on error.
  */
 static int write_string_with(slibc_format_writefn fn, void *fnarg, const char *s, int nwritten)
 {
+	// Handle s == NULL. I think users aren't supposed to pass NULL as a string
+	// argument, but we all know they are going to.
+
+	if (s == NULL)
+	{
+		s = "(null)";
+	}
+
+	// Do actual printing. Count bytes.
+
 	int written_by_us = 0;
 
 	while (*s)
@@ -134,6 +155,15 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool termina
 				to_print = slibc_i64_to_string(arg);
 			}
 
+			goto print_formatted;
+		}
+
+		// check for single character
+
+		if (*fptr == 'c')
+		{
+			const char arg = va_arg(args, int);
+			to_print = format_single_character(arg);
 			goto print_formatted;
 		}
 
