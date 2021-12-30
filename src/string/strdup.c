@@ -8,8 +8,8 @@ char *strdup(const char *s)
 		return NULL;
 	}
 
-	const size_t len = strlen(s);
-	char *const buffer = malloc(len);
+	const size_t buffer_size = strlen(s) + 1;
+	char *const buffer = malloc(buffer_size);
 
 	if (!buffer)
 	{
