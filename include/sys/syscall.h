@@ -14,3 +14,4 @@
 #define SYS_wait4 61
 #define SYS_getcwd 79
 #define SYS_chdir 80
+#define SYS_unlink 87

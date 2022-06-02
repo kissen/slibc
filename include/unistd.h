@@ -102,3 +102,8 @@ int chdir(const char *dir);
  * Generic interface for running system calls.
  */
 long syscall(long number, ...);
+
+/**
+ * Try to delete file at path.
+ */
+int unlink(const char *pathname);
