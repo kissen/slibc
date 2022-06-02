@@ -2,6 +2,14 @@
 
 #include "alloca.h"
 #include "stddef.h"
+#include "stdint.h"
+
+// Types
+
+struct random_data
+{
+    uint64_t state;
+};
 
 // (7.22) General utilities
 
@@ -131,3 +139,19 @@ int rand(void);
  * than an int.
  */
 long random(void);
+
+/**
+ * Seed random number generator at buf.
+ *
+ * Returns 0 on success. On error, -1 is returned and errno is set to indicate
+ * the kind of error.
+ */
+int srandom_r(unsigned int seed, struct random_data *buf);
+
+/**
+ * Return random number in result.
+ *
+ * Returns 0 on success. On error, -1 is returned and errno is set to indicate
+ * the kind of error.
+ */
+int random_r(struct random_data *buf, int32_t *result);

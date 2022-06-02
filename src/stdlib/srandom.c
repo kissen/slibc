@@ -1,8 +1,8 @@
 #include "stdlib.h"
 
-#include "stdlib/random.h"
+#include "slibc_global_rng.h"
 
 void srandom(unsigned int seed)
 {
-	random_last = seed - 1;
+	srandom_r(seed, &slibc_global_rng);
 }

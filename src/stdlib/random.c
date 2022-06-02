@@ -1,10 +1,15 @@
 #include "stdlib.h"
 
-#include "stdlib/random.h"
+#include "slibc_global_rng.h"
 
 long random(void)
 {
-	// Based on https://git.musl-libc.org/cgit/musl/tree/src/prng/rand.c.
-	random_last = 6364136223846793005ULL * random_last + 1;
-	return random_last;
+	int32_t random_value;
+
+	if (!random_r(&slibc_global_rng, &random_value))
+	{
+		return random_value;
+	}
+
+	return 0;
 }
