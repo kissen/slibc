@@ -14,6 +14,8 @@ static const char *error_to_string(int errnum)
 {
 	switch (errnum)
 	{
+	case EPERM:
+		return "permission denied";
 	case ENOENT:
 		return "no such file or directory";
 	case ENOMEM:
