@@ -19,6 +19,11 @@ int fclose(FILE *fp)
 		error = errno;
 	}
 
+	if (fp->on_close_func)
+	{
+		fp->on_close_func(fp);
+	}
+
 	free(fp);
 
 	if (error)

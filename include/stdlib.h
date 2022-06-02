@@ -8,7 +8,7 @@
 
 struct random_data
 {
-    uint64_t state;
+	uint64_t state;
 };
 
 // (7.22) General utilities

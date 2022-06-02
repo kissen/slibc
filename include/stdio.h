@@ -130,3 +130,8 @@ size_t fread(void *buf, size_t size, size_t nmemb, FILE *fp);
  * Write to file.
  */
 size_t fwrite(const void *buf, size_t size, size_t nmemb, FILE *fp);
+
+/**
+ * Create temporary file you can use for writing.
+ */
+FILE *tmpfile(void);
