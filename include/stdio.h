@@ -54,7 +54,12 @@ int fprintf(FILE *stream, const char *format, ...);
 /**
  * Formatted output to str of arbitrary length.
  */
-int sprintf(char *buffer, const char *format, ...);
+int sprintf(char *str, const char *format, ...);
+
+/**
+ * Formatted output to str of maximum length n.
+ */
+int snprintf(char *str, size_t n, const char *format, ...);
 
 /**
  * Output error message according to current errno with prefix.
