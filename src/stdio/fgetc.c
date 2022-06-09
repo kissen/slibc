@@ -19,7 +19,7 @@ static int fgetc_from_fd(FILE *stream)
 	if ((result = read(stream->fd, &buf, sizeof(buf))) == -1)
 	{
 		errno = labs(result);
-		stream->fd |= FILE_FLAGS_ERROR;
+		stream->flags |= FILE_FLAGS_ERROR;
 		return EOF;
 	}
 
