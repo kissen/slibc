@@ -23,6 +23,9 @@ struct FILE
 	/** The cache for ungetc. We currently only support one byte. */
 	unsigned char unget;
 
+	/** File position indicator as used by ftell(3). */
+	long position;
+
 	/** Function to be called just after close(). */
 	void (*on_close_func)(FILE *);
 

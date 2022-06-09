@@ -29,6 +29,7 @@ static int fgetc_from_fd(FILE *stream)
 		return EOF;
 	}
 
+	stream->position += 1;
 	return buf;
 }
 

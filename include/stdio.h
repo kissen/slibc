@@ -135,3 +135,8 @@ size_t fwrite(const void *buf, size_t size, size_t nmemb, FILE *fp);
  * Create temporary file you can use for writing.
  */
 FILE *tmpfile(void);
+
+/**
+ * Return file position indicator.
+ */
+long ftell(FILE *stream);
