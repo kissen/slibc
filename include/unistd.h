@@ -63,6 +63,12 @@ int munmap(void *addr, size_t length);
 pid_t fork(void);
 
 /**
+ * Vfork system call. An optimized version of fork(), though
+ * our implementation might not be optimized at all.
+ */
+pid_t vfork(void);
+
+/**
  * Getpid system call. Returns the current PID.
  */
 pid_t getpid(void);
