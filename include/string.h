@@ -46,6 +46,11 @@ void *memset(void *s, int c, size_t n);
 char *strerror(int errnum);
 
 /**
+ * Write string error into buf of bufsize bytes.
+ */
+int strerror_r(int errnum, char *buf, size_t bufsize);
+
+/**
  * Return lenght of s.
  */
 size_t strlen(const char *s);
