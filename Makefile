@@ -7,10 +7,13 @@ source_files := $(wildcard src/*/*.c) $(wildcard src/*/*.s)
 object_dirs := $(patsubst src/%, bin/%/, $(source_dirs))
 object_files := $(patsubst src/%.c, bin/%.o, $(filter src/%.c, $(source_files))) $(patsubst src/%.s, bin/%.o, $(filter src/%.s, $(source_files)))
 
+example_files := $(wildcard examples/*.c)
+example_exes := $(patsubst examples/%.c, bin/examples/%, $(example_files))
+
 test_files := $(wildcard tests/*.c)
 test_exes := $(patsubst tests/%.c, bin/tests/%, $(test_files))
 
-all: $(static_library) $(test_exes)
+all: $(static_library) $(example_exes) $(test_exes)
 
 release:
 	$(MAKE) clean
@@ -26,8 +29,11 @@ bin/%.o: src/%.c | $(object_dirs)
 bin/%.o: src/%.s | $(object_dirs)
 	$(CC) -c -o $@ $<
 
-bin/tests/%: tests/%.c $(static_library) | bin/tests/
+bin/examples/%: examples/%.c $(static_library) | bin/examples/
 	$(CC) $(CFLAGS) -o $@ $^
+
+bin/tests/%: tests/%.c $(static_library) | bin/tests/
+	$(CC) $(CFLAGS) -DMUNIT_NO_NL_LANGINFO -I ports/munit -o $@ $^ ports/munit/munit.c
 
 bin/:
 	mkdir -p $@
@@ -40,12 +46,13 @@ compile_commands.json:
 	compiledb $(MAKE)
 
 clean:
-	rm -f $(test_exes)
+	rm -f $(example_exes)
 	rm -f $(static_library)
+	rm -f $(test_exes)
 	rm -f $(filter %.o, $(object_files))
-	rm -df $(object_dirs) bin/tests/ bin/
+	rm -df $(object_dirs) bin/examples/ bin/tests/ bin/
 	rm -f compile_commands.json
 	rm -rf .cache
 
 .PHONY: all release clean
-.PRECIOUS: $(object_dirs) bin/tests/
+.PRECIOUS: $(object_dirs) bin/examples/
