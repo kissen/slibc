@@ -15,4 +15,5 @@
 #define SYS_getcwd 79
 #define SYS_chdir 80
 #define SYS_unlink 87
+#define SYS_times 100
 #define SYS_time 201
