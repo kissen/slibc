@@ -123,3 +123,8 @@ int dup(int fd);
  * Duplicate oldfd into newfd.
  */
 int dup2(int oldfd, int newfd);
+
+/**
+ * Create a pipe.
+ */
+int pipe(int fds[2]);
