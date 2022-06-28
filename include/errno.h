@@ -9,6 +9,7 @@
 #define EINVAL 22
 #define EDOM 33
 #define ERANGE 34
+#define EBADF 77
 #define EILSEQ 84
 
 extern int errno;

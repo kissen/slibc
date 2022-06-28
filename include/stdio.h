@@ -140,3 +140,8 @@ FILE *tmpfile(void);
  * Return file position indicator.
  */
 long ftell(FILE *stream);
+
+/**
+ * Return underlying file descriptor for fp.
+ */
+int fileno(FILE *fp);

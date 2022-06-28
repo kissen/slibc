@@ -28,6 +28,8 @@ static const char *error_to_string(int errnum)
 		return "domain eror";
 	case ERANGE:
 		return "range error";
+	case EBADF:
+		return "bad file";
 	case EILSEQ:
 		return "EILSEQ";
 	case 0:
