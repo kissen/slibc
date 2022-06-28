@@ -8,6 +8,8 @@
 #define SYS_mmap 9
 #define SYS_munmap 11
 #define SYS_ioctl 16
+#define SYS_dup 32
+#define SYS_dup2 33
 #define SYS_getpid 39
 #define SYS_fork 57
 #define SYS_execve 59

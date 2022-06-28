@@ -113,3 +113,13 @@ long syscall(long number, ...);
  * Try to delete file at path.
  */
 int unlink(const char *pathname);
+
+/**
+ * Duplicate fd.
+ */
+int dup(int fd);
+
+/**
+ * Duplicate oldfd into newfd.
+ */
+int dup2(int oldfd, int newfd);
