@@ -14,7 +14,7 @@ typedef long long clock_t;
  * Given some clock_t value t, divide t by CLOCKS_PER_SEC to get time t in
  * seconds.
  */
-#define CLOCKS_PER_SEC ((clock_t) 1000000)
+#define CLOCKS_PER_SEC ((clock_t)1000000)
 
 /**
  * On success, return current unix time stamp. If tptr is non-NULL, the result

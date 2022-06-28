@@ -2,8 +2,8 @@
 
 typedef struct
 {
-    unsigned long long ip;
-    unsigned long long sp;
+	unsigned long long ip;
+	unsigned long long sp;
 } jmp_buf;
 
 /**

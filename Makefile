@@ -45,6 +45,9 @@ compile_commands.json:
 	$(MAKE) clean
 	compiledb $(MAKE)
 
+format:
+	clang-format -i src/*/*.c src/*/*.h include/*.h include/sys/*.h examples/*.c tests/*.c
+
 clean:
 	rm -f $(example_exes)
 	rm -f $(static_library)
@@ -54,5 +57,5 @@ clean:
 	rm -f compile_commands.json
 	rm -rf .cache
 
-.PHONY: all release clean
+.PHONY: all release format clean
 .PRECIOUS: $(object_dirs) bin/examples/
