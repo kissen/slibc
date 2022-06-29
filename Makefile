@@ -58,4 +58,4 @@ clean:
 	rm -rf .cache
 
 .PHONY: all release format clean
-.PRECIOUS: $(object_dirs) bin/examples/
+.PRECIOUS: $(object_dirs) bin/examples/ bin/tests/
