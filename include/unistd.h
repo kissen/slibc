@@ -128,3 +128,8 @@ int dup2(int oldfd, int newfd);
  * Create a pipe.
  */
 int pipe(int fds[2]);
+
+/**
+ * Seek file at descriptor fd by offset.
+ */
+off_t lseek(int fd, off_t offset, int whence);
