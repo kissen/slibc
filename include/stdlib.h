@@ -107,12 +107,12 @@ long long llabs(long long k);
 /**
  * Exit process with status.
  */
-void exit(int status);
+void __attribute__((noreturn)) exit(int status);
 
 /**
  * Abort the process.
  */
-void abort(void);
+void __attribute__((noreturn)) abort(void);
 
 /**
  * Get environment variable value for key. Return NULL if key was not found.

@@ -15,5 +15,6 @@ void abort(void)
 		perror("abort: kill");
 	}
 
-	exit(99);
+	exit(99); // just to be sure :^)
+	__builtin_unreachable();
 }
