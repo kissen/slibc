@@ -153,3 +153,8 @@ long ftell(FILE *stream);
  * Return underlying file descriptor for fp.
  */
 int fileno(FILE *fp);
+
+/**
+ * Seek in file
+ */
+int fseek(FILE *fp, long off, int whence);
