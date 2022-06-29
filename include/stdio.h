@@ -3,6 +3,7 @@
 #include <stddef.h>
 
 #define EOF -1
+#define PRIx32 "x"
 
 /**
  * Opaque data type that represents a file handle.
