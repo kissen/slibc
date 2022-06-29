@@ -33,7 +33,7 @@ bin/examples/%: examples/%.c $(static_library) | bin/examples/
 	$(CC) $(CFLAGS) -o $@ $^
 
 bin/tests/%: tests/%.c $(static_library) | bin/tests/
-	$(CC) $(CFLAGS) -D__STDC_NO_ATOMICS__ -DMUNIT_NO_NL_LANGINFO -I ports/munit -o $@ $^ ports/munit/munit.c
+	$(CC) $(CFLAGS) -D__STDC_NO_ATOMICS__ -DMUNIT_NO_NL_LANGINFO -I ports/munit -o $@ ports/munit/munit.c $^
 
 bin/:
 	mkdir -p $@
