@@ -133,3 +133,8 @@ int pipe(int fds[2]);
  * Seek file at descriptor fd by offset.
  */
 off_t lseek(int fd, off_t offset, int whence);
+
+/**
+ * Return whether file descriptor fd points to to a TTY.
+ */
+int isatty(int fd);
