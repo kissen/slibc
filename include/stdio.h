@@ -158,3 +158,8 @@ int fileno(FILE *fp);
  * Seek in file
  */
 int fseek(FILE *fp, long off, int whence);
+
+/**
+ * Seek to beginning of fp.
+ */
+void rewind(FILE *fp);
