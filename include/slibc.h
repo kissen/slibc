@@ -133,6 +133,22 @@ const char *slibc_u64_to_string(slibc_u64 k);
 const char *slibc_i64_to_string(slibc_i64 k);
 
 /**
+ * Return length of zero terminated string s in bytes, not including the
+ * terminating zero. Unlike strlen(3), this function will return a size
+ * of zero if argument s is NULL.
+ */
+size_t slibc_string_len(const char *s);
+
+/**
+ * Take malloced_string and append up to chars_to_append many characters from
+ * zero terminated string append to malloced_string. This involves a realloc.
+ *
+ * Return realloced version of malloced_string with created appendix. Return
+ * NULL on allocation errors in which case errno will be set.
+ */
+char *slibc_string_append(char *malloced_string, const char *append, size_t chars_to_append);
+
+/**
  * Function type used with function slibc_format. A call to a function of type
  * slibc_format_writefn should write character c to some output stream when so
  * far nwritten many bytes were written. fnarg is an optional argument
@@ -157,4 +173,4 @@ int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool termina
 				 const char *format, va_list args);
 
 typedef int(slibc_scan_readfn)(void *fnarg, int nread);
-int slibc_scan(slibc_scan_readfn, void *fnarg, const char *format, va_list targets);
+int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list targets);
