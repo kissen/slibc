@@ -72,7 +72,7 @@ figlet: $(OBJS) $(CLIB)
 	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(CLIB)
 
 chkfont: chkfont.o
-	$(LD) $(LDFLAGS) -o $@ chkfont.o
+	$(LD) $(LDFLAGS) -o $@ chkfont.o $(CLIB)
 
 $(CLIB):
 	$(MAKE) -C ../../ bin/slibc.a
