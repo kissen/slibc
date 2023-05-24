@@ -29,6 +29,11 @@ typedef signed long int slibc_i64;
 #define SLIBC_MIN(X, Y) ((X) < (Y) ? (X) : (Y))
 
 /**
+ * Write formatted log message to stderr. Useful for debugging.
+ */
+#define SLIBC_LOG(...) slibc_log(__FILE__, __LINE__, __VA_ARGS__);
+
+/**
  * ASM entry point.
  */
 void _start(void);
@@ -147,6 +152,13 @@ size_t slibc_string_len(const char *s);
  * NULL on allocation errors in which case errno will be set.
  */
 char *slibc_string_append(char *malloced_string, const char *append, size_t chars_to_append);
+
+/**
+ * Log formatted log message to stderr. Useful for debugging. Instead of calling
+ * this function directly, consdere using SLIBC_LOG instead. It already fills out
+ * some parameters for you.
+ */
+void slibc_log(const char *file, int line, const char *format, ...);
 
 /**
  * Function type used with function slibc_format. A call to a function of type
