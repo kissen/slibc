@@ -70,6 +70,21 @@ int sprintf(char *str, const char *format, ...);
 int snprintf(char *str, size_t n, const char *format, ...);
 
 /**
+ * Read formatted input from stdin.
+ */
+int scanf(const char *format, ...);
+
+/**
+ * Read formatted input from file.
+ */
+int fscanf(FILE *stream, const char *format, ...);
+
+/**
+ * Read formatted input from string.
+ */
+int sscanf(const char *str, const char *format, ...);
+
+/**
  * Output error message according to current errno with prefix.
  */
 void perror(const char *prefix);

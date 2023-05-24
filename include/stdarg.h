@@ -19,3 +19,7 @@ int vfprintf(FILE *stream, const char *format, va_list ap);
 
 int vsprintf(char *buffer, const char *format, va_list ap);
 int vsnprintf(char *buffer, size_t bufsize, const char *format, va_list ap);
+
+int vscanf(const char *format, va_list ap);
+int vsscanf(const char *str, const char *format, va_list ap);
+int vfscanf(FILE *stream, const char *format, va_list ap);

@@ -133,7 +133,7 @@ const char *slibc_u64_to_string(slibc_u64 k);
 const char *slibc_i64_to_string(slibc_i64 k);
 
 /**
- * Function types used with function sblic_format. A call to a function of type
+ * Function type used with function slibc_format. A call to a function of type
  * slibc_format_writefn should write character c to some output stream when so
  * far nwritten many bytes were written. fnarg is an optional argument
  * implementation-defined by the given implementation.
@@ -155,3 +155,6 @@ typedef int(slibc_format_writefn)(char c, int nwritten, void *fnarg);
  */
 int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool terminate_zero,
 				 const char *format, va_list args);
+
+typedef int(slibc_scan_readfn)(void *fnarg, int nread);
+int slibc_scan(slibc_scan_readfn, void *fnarg, const char *format, va_list targets);
