@@ -3,9 +3,12 @@
 #include "stdlib.h"
 #include "string.h"
 
-char *slibc_string_append(char *malloced_string, const char *append, size_t chars_to_append)
+char *slibc_string_append(char *const malloced_string, const char *const append,
+						  const size_t chars_to_append)
 {
-	const size_t required_size = slibc_string_len(malloced_string) + chars_to_append;
+	// enlarge malloced_string to contain the tail
+
+	const size_t required_size = slibc_string_len(malloced_string) + chars_to_append + 1;
 	char *const realloced = realloc(malloced_string, required_size);
 
 	if (!realloced)
@@ -13,6 +16,26 @@ char *slibc_string_append(char *malloced_string, const char *append, size_t char
 		return NULL;
 	}
 
-	snprintf(realloced, required_size, "%s%s", realloced, append);
-	return malloced_string;
+	// copy tail
+
+	char *dstptr = realloced;
+	const char *srcptr = append;
+
+	while (*dstptr)
+	{
+		dstptr += 1;
+	}
+
+	for (size_t i = 0; i < chars_to_append; ++i)
+	{
+		*dstptr = *srcptr;
+		dstptr += 1;
+		srcptr += 1;
+	}
+
+	// terminate and return
+
+	*dstptr = 0;
+
+	return realloced;
 }

@@ -3,5 +3,5 @@
 
 int vscanf(const char *format, va_list ap)
 {
-	return vfprintf(stdin, format, ap);
+	return vfscanf(stdin, format, ap);
 }

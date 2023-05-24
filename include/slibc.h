@@ -2,6 +2,7 @@
 
 #include "stdarg.h"
 #include "stdbool.h"
+#include "stdio.h"
 
 typedef long long int slibc_imax;
 typedef long long unsigned int slibc_umax;

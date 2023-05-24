@@ -1,3 +1,4 @@
+#include "assert.h"
 #include "ctype.h"
 #include "slibc.h"
 #include "stdarg.h"
@@ -8,82 +9,94 @@
 
 #define SCAN_FAILED 0
 #define SCAN_OK 1
-#define SCAN_NO_PLACEHOLDER 2
 
-static int scan_for_placeholder(slibc_scan_readfn fn, void *fnarg, int *nread, va_list targets)
+struct fn_reader
 {
-	int result = SCAN_OK;
+	slibc_scan_readfn *fn;
+	void *fnarg;
+	int nread;
+	int unget;
+};
+
+static void unget_to(struct fn_reader *reader, int c)
+{
+	assert(reader->unget == EOF);
+	reader->unget = c;
+}
+
+static int read_from_func(char *dst, struct fn_reader *reader)
+{
+	// if a value was ungotten, prefer that
+
+	if (reader->unget != EOF)
+	{
+		*dst = reader->unget;
+		reader->unget = EOF;
+
+		return SCAN_OK;
+	}
+
+	// we have to actually invoke the callback
+
 	int c;
-	char cc;
+
+	if ((c = reader->fn(reader->fnarg, reader->nread)) == EOF)
+	{
+		return SCAN_FAILED;
+	}
+
+	*dst = (char)c;
+	reader->nread += 1;
+
+	return SCAN_OK;
+}
+
+static int scan_char(int *dst, struct fn_reader *reader)
+{
+	char c;
+
+	if (read_from_func(&c, reader) == SCAN_FAILED)
+	{
+		return SCAN_FAILED;
+	}
+
+	*dst = c;
+	return SCAN_OK;
+}
+
+static int scan_digits(int *dst, struct fn_reader *reader)
+{
+	char c;
 	char *token = NULL;
-	char *token_extended;
+	char *tokennext;
 
-	// read out character that tells us what we are looking at
-
-	if ((c = fn(fnarg, *nread) == EOF))
+	if (!(token = strdup("")))
 	{
-		result = SCAN_FAILED;
-		goto end;
+		goto fail;
 	}
 
-	*nread += 1;
-
-	// now parse; depending on type this can involve reading the token first
-
-	if (c == '%')
+	while (read_from_func(&c, reader) != SCAN_FAILED)
 	{
-		result = SCAN_NO_PLACEHOLDER;
-		goto end;
-	}
-
-	if (c == 'c')
-	{
-		if ((c = fn(fnarg, *nread)) == EOF)
+		if (!isdigit(c))
 		{
-			result = SCAN_FAILED;
-			goto end;
+			unget_to(reader, c);
+			break;
 		}
 
-		*nread += 1;
-		int *const target = va_arg(targets, int *);
-		*target = c;
-	}
-
-	if (c == 'd')
-	{
-		if (!(token = strdup("")))
+		if (!(tokennext = slibc_string_append(token, &c, sizeof(c))))
 		{
-			result = SCAN_FAILED;
-			goto end;
+			goto fail;
 		}
 
-		while ((c = fn(fnarg, *nread)) != EOF)
-		{
-			*nread += 1;
-
-			if (!isdigit(c))
-			{
-				break;
-			}
-
-			cc = (char)c;
-
-			if (!(token_extended = slibc_string_append(token, &cc, sizeof(cc))))
-			{
-				result = SCAN_FAILED;
-				goto end;
-			}
-
-			token = token_extended;
-		}
-
-		int *const target = va_arg(targets, int *);
-		*target = (int)strtoll(token, NULL, 10);
+		token = tokennext;
 	}
 
-end:
+	*dst = strtoll(token, NULL, 10);
+	return SCAN_OK;
+
+fail:
 	free(token);
-	return result;
+	return SCAN_FAILED;
 }
 
 int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list targets)
@@ -93,41 +106,63 @@ int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list ta
 	// how *scanf works because I almost never use it.
 
 	int nmatched = 0;
-	int nread = 0;
 	const char *format_pos = format;
-	int read_val;
+	char in;
 
-	while (format_pos && ((read_val = fn(fnarg, nread)) != EOF))
+	struct fn_reader reader = {.fn = fn, .fnarg = fnarg, .nread = 0, .unget = EOF};
+
+	while (*format_pos)
 	{
-		const char fc = *format_pos;
-		const char rc = (char)read_val;
-
-		nread += 1;
-		format_pos += 1;
-
-		if (fc == '%')
+		if (*format_pos == '%')
 		{
-			switch (scan_for_placeholder(fn, fnarg, &nread, targets))
+			// some placeholder was found
+
+			format_pos += 1;
+
+			switch (*format_pos)
 			{
-			case SCAN_FAILED:
-				goto end;
+			case 'c': {
+				int *const target = va_arg(targets, int *);
+				if (scan_char(target, &reader) == SCAN_FAILED)
+				{
+					goto end;
+				}
 
-			case SCAN_OK:
-				nmatched += 1;
-				break;
-
-			case SCAN_NO_PLACEHOLDER:
-			default:
 				break;
 			}
 
-			continue;
+			case 'd': {
+				int *const target = va_arg(targets, int *);
+				if (scan_digits(target, &reader) == SCAN_FAILED)
+				{
+					goto end;
+				}
+
+				break;
+
+			default:
+				goto end;
+			}
+			}
+
+			nmatched += 1;
+		}
+		else
+		{
+			// some normal char was found; match it
+
+			if (read_from_func(&in, &reader) == SCAN_FAILED)
+			{
+				goto end;
+			}
+
+			if (*format_pos != in)
+			{
+				goto end;
+			}
 		}
 
-		if (fc != rc)
-		{
-			return nmatched;
-		}
+		format_pos += 1;
 	}
 
 end:
