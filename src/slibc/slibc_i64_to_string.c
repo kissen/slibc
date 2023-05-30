@@ -2,9 +2,9 @@
 #include "stdlib.h"
 #include "string.h"
 
-const char *slibc_i64_to_string(slibc_i64 k)
+const char *slibc_i64_to_string(int64_t k)
 {
-	const slibc_u64 absolute = llabs(k);
+	const uint64_t absolute = llabs(k);
 	const char *const as_string = slibc_u64_to_string(absolute);
 
 	if (k >= 0)

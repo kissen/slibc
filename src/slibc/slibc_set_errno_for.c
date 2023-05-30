@@ -2,7 +2,7 @@
 #include "slibc.h"
 #include "stdlib.h"
 
-slibc_i64 slibc_set_errno_for(slibc_i64 system_call_result)
+int64_t slibc_set_errno_for(int64_t system_call_result)
 {
 	if (system_call_result < 0)
 	{

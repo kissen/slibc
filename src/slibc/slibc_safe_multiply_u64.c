@@ -2,9 +2,9 @@
 #include "slibc.h"
 #include "stddef.h"
 
-slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *product)
+uint64_t *slibc_safe_multiply_u64(uint64_t lhs, uint64_t rhs, uint64_t *product)
 {
-	const slibc_u64 result = lhs * rhs;
+	const uint64_t result = lhs * rhs;
 
 	if (result / rhs != lhs)
 	{

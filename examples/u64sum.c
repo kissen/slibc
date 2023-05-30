@@ -4,11 +4,11 @@
 
 int main(int argc, char **argv)
 {
-	slibc_u64 sum = 0;
+	uint64_t sum = 0;
 
 	for (int i = 1; i < argc; ++i)
 	{
-		const slibc_u64 value = strtoll(argv[i], NULL, 10);
+		const uint64_t value = strtoll(argv[i], NULL, 10);
 		sum += value;
 	}
 

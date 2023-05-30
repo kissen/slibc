@@ -3,7 +3,7 @@
 
 #include "unistd/linux.h"
 
-slibc_i64 linux_get_error_from(void *ptr)
+int64_t linux_get_error_from(void *ptr)
 {
-	return labs((slibc_i64)ptr);
+	return labs((int64_t)ptr);
 }

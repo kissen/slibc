@@ -4,5 +4,5 @@
 
 int dup(int fd)
 {
-	return slibc_syscall_and_set1(SYS_dup, (slibc_u64)fd);
+	return slibc_syscall_and_set1(SYS_dup, (uint64_t)fd);
 }

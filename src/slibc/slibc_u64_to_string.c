@@ -2,7 +2,7 @@
 #include "string.h"
 #include "unistd.h"
 
-const char *slibc_u64_to_string(slibc_u64 k)
+const char *slibc_u64_to_string(uint64_t k)
 {
 	// special case zero
 
@@ -15,14 +15,14 @@ const char *slibc_u64_to_string(slibc_u64 k)
 
 	static char buffer[32];
 
-	slibc_u64 remaining = k;
+	uint64_t remaining = k;
 	ssize_t i = sizeof(buffer) - 1;
 
 	while (remaining > 0 && i >= 1)
 	{
 		i -= 1;
 
-		const slibc_u64 digit = remaining % 10;
+		const uint64_t digit = remaining % 10;
 		const char asciidigit = digit + '0';
 
 		buffer[i] = asciidigit;

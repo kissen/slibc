@@ -6,7 +6,7 @@
 
 int kill(pid_t pid, int sig)
 {
-	const slibc_i64 result = slibc_syscall2(62, pid, sig);
+	const int64_t result = slibc_syscall2(62, pid, sig);
 
 	if (result < 0)
 	{

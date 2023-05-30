@@ -4,5 +4,5 @@
 
 clock_t times(struct tms *buf)
 {
-	return slibc_syscall_and_set1(SYS_times, (slibc_u64)buf);
+	return slibc_syscall_and_set1(SYS_times, (uint64_t)buf);
 }

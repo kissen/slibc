@@ -1,7 +1,7 @@
 #include "slibc.h"
 
-slibc_i64 slibc_syscall_and_set0(slibc_u64 num)
+int64_t slibc_syscall_and_set0(uint64_t num)
 {
-	const slibc_i64 result = slibc_syscall0(num);
+	const int64_t result = slibc_syscall0(num);
 	return slibc_set_errno_for(result);
 }

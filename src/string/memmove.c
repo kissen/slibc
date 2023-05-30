@@ -1,9 +1,9 @@
-#include "slibc.h"
+#include "stdint.h"
 #include "string.h"
 
 static char *move_from_back(char *dst, const char *src, size_t n)
 {
-	for (slibc_imax i = n - 1; i >= 0; --i)
+	for (int64_t i = n - 1; i >= 0; --i)
 	{
 		dst[i] = src[i];
 	}

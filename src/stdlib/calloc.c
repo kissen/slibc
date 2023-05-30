@@ -5,7 +5,7 @@
 
 void *calloc(size_t nmemb, size_t size)
 {
-	slibc_u64 total_bytes;
+	uint64_t total_bytes;
 	void *ptr;
 
 	if (!slibc_safe_multiply_u64(nmemb, size, &total_bytes))

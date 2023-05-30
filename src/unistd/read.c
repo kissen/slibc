@@ -4,5 +4,5 @@
 
 ssize_t read(int fd, void *buf, size_t count)
 {
-	return slibc_syscall_and_set3(SYS_read, fd, (slibc_u64)buf, count);
+	return slibc_syscall_and_set3(SYS_read, fd, (uint64_t)buf, count);
 }

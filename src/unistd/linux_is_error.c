@@ -8,8 +8,8 @@
 
 bool linux_is_error(void *ptr)
 {
-	const slibc_u64 kernel_return_value = (slibc_u64)ptr;
-	const slibc_u64 max_errno = (slibc_u64)(-MAX_ERRNO);
+	const uint64_t kernel_return_value = (uint64_t)ptr;
+	const uint64_t max_errno = (uint64_t)(-MAX_ERRNO);
 
 	return kernel_return_value >= max_errno;
 }

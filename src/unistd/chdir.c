@@ -4,5 +4,5 @@
 
 int chdir(const char *dir)
 {
-	return slibc_syscall_and_set1(SYS_chdir, (slibc_u64)dir);
+	return slibc_syscall_and_set1(SYS_chdir, (uint64_t)dir);
 }

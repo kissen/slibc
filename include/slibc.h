@@ -2,22 +2,8 @@
 
 #include "stdarg.h"
 #include "stdbool.h"
+#include "stdint.h"
 #include "stdio.h"
-
-typedef long long int slibc_imax;
-typedef long long unsigned int slibc_umax;
-
-typedef unsigned char slibc_u8;
-typedef signed char slibc_i8;
-
-typedef unsigned short slibc_u16;
-typedef signed short slibc_i16;
-
-typedef unsigned int slibc_u32;
-typedef signed int slibc_i32;
-
-typedef unsigned long int slibc_u64;
-typedef signed long int slibc_i64;
 
 /**
  * Resolve to absolute value of X.
@@ -47,96 +33,95 @@ void slibc_start(int argc, char **argv);
 /**
  * Issue system call num with no arguments.
  */
-slibc_u64 slibc_syscall0(slibc_u64 num);
+uint64_t slibc_syscall0(uint64_t num);
 
 /**
  * Issue system call num with one argument.
  */
-slibc_u64 slibc_syscall1(slibc_u64 num, slibc_u64);
+uint64_t slibc_syscall1(uint64_t num, uint64_t);
 
 /**
  * Issue system call num with two arguments.
  */
-slibc_u64 slibc_syscall2(slibc_u64 num, slibc_u64, slibc_u64);
+uint64_t slibc_syscall2(uint64_t num, uint64_t, uint64_t);
 
 /**
  * Issue system call num with three arguments.
  */
-slibc_u64 slibc_syscall3(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64);
+uint64_t slibc_syscall3(uint64_t num, uint64_t, uint64_t, uint64_t);
 
 /**
  * Issue system call num with four arguments.
  */
-slibc_u64 slibc_syscall4(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
+uint64_t slibc_syscall4(uint64_t num, uint64_t, uint64_t, uint64_t, uint64_t);
 
 /**
  * Issue system call num with six arguments.
  */
-slibc_u64 slibc_syscall6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64, slibc_u64,
-						 slibc_u64);
+uint64_t slibc_syscall6(uint64_t num, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t);
 
 /**
  * Handle numeric system call result. If it is negative, errno is set
  * accordingly and -1 is returned. If the result is >= 0, that value is returned
  * as-is and errno is not touched.
  */
-slibc_i64 slibc_set_errno_for(slibc_i64 system_call_result);
+int64_t slibc_set_errno_for(int64_t system_call_result);
 
 /**
  * Issue system call with given arguments. Handle the result as by a call to
  * slibc_set_errno_for. Return error code for use by the application.
  */
-slibc_i64 slibc_syscall_and_set0(slibc_u64 num);
+int64_t slibc_syscall_and_set0(uint64_t num);
 
 /**
  * Issue system call with given arguments. Handle the result as by a call to
  * slibc_set_errno_for. Return error code for use by the application.
  */
-slibc_i64 slibc_syscall_and_set1(slibc_u64 num, slibc_u64);
+int64_t slibc_syscall_and_set1(uint64_t num, uint64_t);
 
 /**
  * Issue system call with given arguments. Handle the result as by a call to
  * slibc_set_errno_for. Return error code for use by the application.
  */
-slibc_i64 slibc_syscall_and_set2(slibc_u64 num, slibc_u64, slibc_u64);
+int64_t slibc_syscall_and_set2(uint64_t num, uint64_t, uint64_t);
 
 /**
  * Issue system call with given arguments. Handle the result as by a call to
  * slibc_set_errno_for. Return error code for use by the application.
  */
-slibc_i64 slibc_syscall_and_set3(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64);
+int64_t slibc_syscall_and_set3(uint64_t num, uint64_t, uint64_t, uint64_t);
 
 /**
  * Issue system call with given arguments. Handle the result as by a call to
  * slibc_set_errno_for. Return error code for use by the application.
  */
-slibc_i64 slibc_syscall_and_set4(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64);
+int64_t slibc_syscall_and_set4(uint64_t num, uint64_t, uint64_t, uint64_t, uint64_t);
 
 /**
  * Issue system call with given arguments. Handle the result as by a call to
  * slibc_set_errno_for. Return error code for use by the application.
  */
-slibc_i64 slibc_syscall_and_set6(slibc_u64 num, slibc_u64, slibc_u64, slibc_u64, slibc_u64,
-								 slibc_u64, slibc_u64);
+int64_t slibc_syscall_and_set6(uint64_t num, uint64_t, uint64_t, uint64_t, uint64_t, uint64_t,
+							   uint64_t);
 
 /**
  * Try to multiply lhs with rhs. Write result to product.
  * Returns ptr on success and NULL on error (overflow). On error,
  * errno is set to ERANGE.
  */
-slibc_u64 *slibc_safe_multiply_u64(slibc_u64 lhs, slibc_u64 rhs, slibc_u64 *product);
+uint64_t *slibc_safe_multiply_u64(uint64_t lhs, uint64_t rhs, uint64_t *product);
 
 /**
  * Convert n to a string representation. The returned string is guaranteed
  * to zero-terminated and statically allocated. Do not pass it to free.
  */
-const char *slibc_u64_to_string(slibc_u64 k);
+const char *slibc_u64_to_string(uint64_t k);
 
 /**
  * Convert n to a string representation. The returned string is guaranteed
  * to zero-terminated and statically allocated. Do not pass it to free.
  */
-const char *slibc_i64_to_string(slibc_i64 k);
+const char *slibc_i64_to_string(int64_t k);
 
 /**
  * Return length of zero terminated string s in bytes, not including the

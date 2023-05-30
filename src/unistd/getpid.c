@@ -5,7 +5,7 @@
 
 pid_t getpid(void)
 {
-	const slibc_i64 result = slibc_syscall0(SYS_getpid);
+	const int64_t result = slibc_syscall0(SYS_getpid);
 	assert(result >= 0);
 	return result;
 }

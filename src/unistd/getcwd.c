@@ -6,7 +6,7 @@
 
 char *getcwd(char *buf, size_t size)
 {
-	void *const result = (void *)slibc_syscall2(79, (slibc_u64)buf, size);
+	void *const result = (void *)slibc_syscall2(79, (uint64_t)buf, size);
 
 	if (linux_is_error(result))
 	{
