@@ -1,4 +1,5 @@
 #include "errno.h"
+#include "slibc.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -8,9 +9,9 @@ int execvpe(const char *file, char *const argv[], char *const envp[])
 {
 	// If file is weird, don't even bother.
 
-	const size_t file_len = strlen(file);
+	const size_t file_len = slibc_string_len(file);
 
-	if (!file || file_len == 0)
+	if (!file_len)
 	{
 		errno = ENOENT;
 		return -1;
