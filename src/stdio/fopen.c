@@ -10,39 +10,56 @@
 
 #define UNKNOWN_MODE -1
 
-static int mode_to_flags(const char *mode)
+static bool starts_with_flag(const char *flag, const char *modestr)
 {
-	if (!strcmp(mode, "r"))
+	const size_t flaglen = strlen(flag);
+	return !strncmp(modestr, flag, flaglen);
+}
+
+static int mode_to_flags(const char *const modestr)
+{
+	const char *m = modestr;
+	int mode = 0;
+
+	while (*m)
 	{
-		return O_RDONLY;
+		if (starts_with_flag("r+", modestr))
+		{
+			mode |= O_RDWR;
+			m += 2;
+		}
+		else if (starts_with_flag("r", modestr))
+		{
+			mode |= O_RDONLY;
+			m += 1;
+		}
+		else if (starts_with_flag("w+", modestr))
+		{
+			mode |= (O_RDWR | O_CREAT | O_TRUNC);
+			m += 2;
+		}
+		else if (starts_with_flag("w", modestr))
+		{
+			mode |= (O_WRONLY | O_TRUNC);
+			m += 1;
+		}
+		else if (starts_with_flag("a+", modestr))
+		{
+			mode |= (O_RDWR | O_CREAT | O_TRUNC);
+			m += 2;
+		}
+		else if (starts_with_flag("a", modestr))
+		{
+			mode |= (O_WRONLY | O_TRUNC);
+			m += 1;
+		}
+		else
+		{
+			return UNKNOWN_MODE;
+		}
 	}
 
-	if (!strcmp(mode, "r+"))
-	{
-		return O_RDWR;
-	}
-
-	if (!strcmp(mode, "w"))
-	{
-		return O_WRONLY | O_TRUNC;
-	}
-
-	if (!strcmp(mode, "w+"))
-	{
-		return O_RDWR | O_CREAT | O_TRUNC;
-	}
-
-	if (!strcmp(mode, "a"))
-	{
-		return O_WRONLY | O_TRUNC;
-	}
-
-	if (!strcmp(mode, "a+"))
-	{
-		return O_RDWR | O_CREAT | O_TRUNC;
-	}
-
-	return UNKNOWN_MODE;
+	return mode;
 }
 
 FILE *fopen(const char *path, const char *mode)
