@@ -1,3 +1,3 @@
 #include "getopt.h"
 
-int optind;
+int optopt;

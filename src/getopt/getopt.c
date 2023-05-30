@@ -65,10 +65,14 @@ static const struct parsed_flag *get_flag(const char *arg, const char *options)
 	return &return_value;
 }
 
-static void fail_with(const char *cmd, const char *reason, const char flag)
+static void report_error(const char *cmd, const char *reason, const char flag)
 {
-	fprintf(stderr, "%s: option -%c: %s\n", cmd, (int)flag, reason);
-	exit(EXIT_FAILURE);
+	if (opterr)
+	{
+		fprintf(stderr, "%s: option -%c: %s\n", cmd, (int)flag, reason);
+	}
+
+	optopt = flag;
 }
 
 int getopt(int argc, char *const argv[], const char *options)
@@ -117,10 +121,8 @@ int getopt(int argc, char *const argv[], const char *options)
 
 	if (!parsed->registered)
 	{
-		if (opterr)
-		{
-			fail_with(*argv, "unknown flag", parsed->flag);
-		}
+		report_error(*argv, "unknown flag", parsed->flag);
+		return '?';
 	}
 
 	if (parsed->registered && parsed->has_value)
@@ -130,9 +132,10 @@ int getopt(int argc, char *const argv[], const char *options)
 		// it is not, it is better not to print error message that might make
 		// the user suspect that the flag is actually valid. After all, why would
 		// we request an argument for a flag that never was valid in the first place?
-		if (optind + 2 >= argc)
+		if (optind + 2 > argc)
 		{
-			fail_with(*argv, "missing value", parsed->flag);
+			report_error(*argv, "missing value", parsed->flag);
+			return ':';
 		}
 
 		optarg = argv[optind + 1];
@@ -146,11 +149,6 @@ int getopt(int argc, char *const argv[], const char *options)
 		// the error and might still call getopt again.
 		optind += 1;
 		optarg = NULL;
-	}
-
-	if (!parsed->registered)
-	{
-		return '?';
 	}
 
 	return parsed->flag;
