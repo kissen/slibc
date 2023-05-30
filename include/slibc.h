@@ -185,5 +185,17 @@ typedef int(slibc_format_writefn)(char c, int nwritten, void *fnarg);
 int slibc_format(slibc_format_writefn fn, void *fnarg, int bufsize, bool terminate_zero,
 				 const char *format, va_list args);
 
+/**
+ * Function type used with function slibc_scan. A call to a function of type
+ * slibc_scan_readfn should read one character (that is, one byte) from some kind
+ * of input stream and return that. It should return EOF on error.
+ */
 typedef int(slibc_scan_readfn)(void *fnarg, int nread);
+
+/**
+ * Scan some input stream accessed with function fn for format. Write matched
+ * arguments into targets.
+ *
+ * Return the number of matched targets.
+ */
 int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list targets);
