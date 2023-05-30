@@ -140,6 +140,11 @@ long syscall(long syscall_number, ...)
 		return_value =
 			slibc_syscall6(syscall_number, args[0], args[1], args[2], args[3], args[4], args[5]);
 		break;
+
+	default: {
+		errno = EINVAL;
+		return -1;
+	}
 	}
 	}
 
@@ -152,6 +157,7 @@ long syscall(long syscall_number, ...)
 		// System calls that return pointers.
 
 		void *const return_pointer = (void *)return_value;
+
 		if (linux_is_error(return_pointer))
 		{
 			errno = linux_get_error_from(return_pointer);
