@@ -87,7 +87,6 @@ int getopt(int argc, char *const argv[], const char *options)
 		current_argc = argc;
 		current_argv = (char **)argv;
 		optind = 1;
-		opterr = 1;
 		current_done = false;
 	}
 

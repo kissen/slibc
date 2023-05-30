@@ -1,3 +1,3 @@
 #include "getopt.h"
 
-int opterr;
+int opterr = 1;
