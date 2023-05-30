@@ -60,8 +60,7 @@ int execvpe(const char *file, char *const argv[], char *const envp[])
 		// Construct the absolute path.
 
 		const size_t abspath_len = strlen(pathptr) + 1 + file_len + 1;
-		char *abspath = malloc(abspath_len);
-		if (!abspath)
+		if (!(abspath = malloc(abspath_len)))
 		{
 			goto fail;
 		}
