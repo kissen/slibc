@@ -60,7 +60,11 @@ static int scan_char(int *dst, struct fn_reader *reader)
 		return SCAN_FAILED;
 	}
 
-	*dst = c;
+	if (dst)
+	{
+		*dst = c;
+	}
+
 	return SCAN_OK;
 }
 
@@ -91,7 +95,11 @@ static int scan_digits(int *dst, struct fn_reader *reader)
 		token = tokennext;
 	}
 
-	*dst = strtoll(token, NULL, 10);
+	if (dst)
+	{
+		*dst = strtoll(token, NULL, 10);
+	}
+
 	return SCAN_OK;
 
 fail:
@@ -119,10 +127,23 @@ int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list ta
 
 			format_pos += 1;
 
+			bool ignore_match = false;
+			void *target = NULL;
+
+			if (*format_pos == '*')
+			{
+				ignore_match = true;
+				format_pos += 1;
+			}
+
 			switch (*format_pos)
 			{
 			case 'c': {
-				int *const target = va_arg(targets, int *);
+				if (!ignore_match)
+				{
+					target = va_arg(targets, int *);
+				}
+
 				if (scan_char(target, &reader) == SCAN_FAILED)
 				{
 					goto end;
@@ -132,7 +153,11 @@ int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list ta
 			}
 
 			case 'd': {
-				int *const target = va_arg(targets, int *);
+				if (!ignore_match)
+				{
+					target = va_arg(targets, int *);
+				}
+
 				if (scan_digits(target, &reader) == SCAN_FAILED)
 				{
 					goto end;
@@ -145,7 +170,10 @@ int slibc_scan(slibc_scan_readfn fn, void *fnarg, const char *format, va_list ta
 			}
 			}
 
-			nmatched += 1;
+			if (!ignore_match)
+			{
+				nmatched += 1;
+			}
 		}
 		else
 		{
