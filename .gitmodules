@@ -1,3 +1,6 @@
 [submodule "ports/munit"]
 	path = ports/munit
 	url = https://github.com/nemequ/munit.git
+[submodule "ports/figlet"]
+	path = ports/figlet
+	url = https://github.com/cmatsuoka/figlet.git

@@ -1,0 +1,42 @@
+23c23
+< CFLAGS	= -g -O2 -Wall -Wno-unused-value
+---
+> CFLAGS = -g -std=c11 -static -ffreestanding -nostdinc -nostdlib -I ../../include/
+25c25
+< LDFLAGS =
+---
+> LDFLAGS = -g -static -ffreestanding -nostdlib
+29c29
+< XCFLAGS	= -DTLF_FONTS
+---
+> XCFLAGS	= #-DTLF_FONTS
+62a63
+> CLIB = ../../bin/slibc.a
+70,71c71,72
+< figlet: $(OBJS)
+< 	$(LD) $(LDFLAGS) -o $@ $(OBJS)
+---
+> figlet: $(OBJS) $(CLIB)
+> 	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(CLIB)
+74c75,78
+< 	$(LD) $(LDFLAGS) -o $@ chkfont.o
+---
+> 	$(LD) $(LDFLAGS) -o $@ chkfont.o $(CLIB)
+> 
+> $(CLIB):
+> 	$(MAKE) -C ../../ bin/slibc.a
+105c109,110
+< 	@echo "Run tests in `pwd`"
+---
+> 	@echo -n "Run tests in "
+> 	@pwd
+110c115
+< 	@printf "Infocode: "; ./figlet -I1
+---
+> 	@echo -n "Infocode: "; ./figlet -I1
+112,113c117,118
+< 	@printf "README: "; head -1 < README|sed 's/.*) //'
+< 	@printf "FAQ: "; grep latest FAQ|sed 's/ and can.*//'
+---
+> 	@echo -n "README: "; head -1 < README|sed 's/.*) //'
+> 	@echo -n "FAQ: "; grep latest FAQ|sed 's/ and can.*//'

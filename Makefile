@@ -13,6 +13,8 @@ example_exes := $(patsubst examples/%.c, bin/examples/%, $(example_files))
 test_files := $(wildcard tests/*.c)
 test_exes := $(patsubst tests/%.c, bin/tests/%, $(test_files))
 
+# Core Library.
+
 all: $(static_library) $(example_exes) $(test_exes)
 
 release:
@@ -29,17 +31,23 @@ bin/%.o: src/%.c | $(object_dirs)
 bin/%.o: src/%.s | $(object_dirs)
 	$(CC) -c -o $@ $<
 
+# Examples and Tests.
+
 bin/examples/%: examples/%.c $(static_library) | bin/examples/
 	$(CC) $(CFLAGS) -o $@ $^
 
 bin/tests/%: tests/%.c $(static_library) | bin/tests/
 	$(CC) $(CFLAGS) -D__STDC_NO_ATOMICS__ -DMUNIT_NO_NL_LANGINFO -D__thread="" -I ports/munit -o $@ ports/munit/munit.c $^
 
+# Directories.
+
 bin/:
 	mkdir -p $@
 
 bin/%/:
 	mkdir -p $@
+
+# Helpful Tools.
 
 compile_commands.json:
 	$(MAKE) clean
@@ -56,6 +64,15 @@ clean:
 	rm -df $(object_dirs) bin/examples/ bin/tests/ bin/
 	rm -f compile_commands.json
 	rm -rf .cache
+
+# Ports.
+
+figlet: $(static_library)
+	$(MAKE) -C ports/figlet clean
+	patch -t ports/figlet/Makefile < ports/figlet.patch
+	$(MAKE) -C ports/figlet
+
+# Additional Paperwork.
 
 .PHONY: all release format clean
 .PRECIOUS: $(object_dirs) bin/examples/ bin/tests/
