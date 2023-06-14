@@ -1,4 +1,5 @@
 CFLAGS += -g -std=c11 -pedantic -Wall -Wextra -static -ffreestanding -nostdinc -nostdlib -I include/ -I src/
+LDFLAGS += -z noexecstack
 
 static_library := bin/slibc.a
 
@@ -34,10 +35,10 @@ bin/%.o: src/%.s | $(object_dirs)
 # Examples and Tests.
 
 bin/examples/%: examples/%.c $(static_library) | bin/examples/
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 bin/tests/%: tests/%.c $(static_library) | bin/tests/
-	$(CC) $(CFLAGS) -D__STDC_NO_ATOMICS__ -DMUNIT_NO_NL_LANGINFO -D__thread="" -I ports/munit -o $@ ports/munit/munit.c $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -D__STDC_NO_ATOMICS__ -DMUNIT_NO_NL_LANGINFO -D__thread="" -I ports/munit -o $@ ports/munit/munit.c $^
 
 # Directories.
 

@@ -5,7 +5,7 @@
 25c25
 < LDFLAGS =
 ---
-> LDFLAGS = -g -static -ffreestanding -nostdlib
+> LDFLAGS = -g -static -ffreestanding -nostdlib -z noexecstack
 29c29
 < XCFLAGS	= -DTLF_FONTS
 ---
