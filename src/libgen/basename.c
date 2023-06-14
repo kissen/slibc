@@ -3,7 +3,7 @@
 
 #define SEPARATOR '/'
 
-const char *basename(const char *path)
+char *basename(char *path)
 {
 	char *const last_slash = strrchr(path, SEPARATOR);
 
