@@ -4,3 +4,6 @@
 [submodule "ports/figlet"]
 	path = ports/figlet
 	url = https://github.com/cmatsuoka/figlet.git
+[submodule "ports/bash"]
+	path = ports/bash
+	url = https://git.savannah.gnu.org/git/bash.git
