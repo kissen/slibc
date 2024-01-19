@@ -131,6 +131,13 @@ const char *slibc_i64_to_string(int64_t k);
 size_t slibc_string_len(const char *s);
 
 /**
+ * Return whether s and t are equal. They are equal either if
+ * (1) both of them are NULL or if (2) they are zero terminated
+ * strings that are equal (as per strcmp).
+ */
+bool slibc_string_eq(const char *s, const char *t);
+
+/**
  * Take malloced_string and append up to chars_to_append many characters from
  * zero terminated string append to malloced_string. This involves a realloc.
  *
